@@ -1,0 +1,134 @@
+/* =============================================
+   SKILLS.CSS — Sección de habilidades
+   R.Y.G.O | Ronald Yamir Gallo Oliva
+   ============================================= */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover::before {
+  transform: scaleX(1);
+}
+
+.skill-card:hover {
+  border-color: rgba(59,130,246,0.5);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(59,130,246,0.2);
+}
+
+.skill-icon {
+  font-size: 2.5rem;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px currentColor);
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 8px 16px currentColor);
+}
+
+.skill-icon.html    { color: #e34f26; }
+.skill-icon.css     { color: #264de4; }
+.skill-icon.js      { color: #f7df1e; }
+.skill-icon.php     { color: #8892be; }
+.skill-icon.laravel { color: #ff2d20; }
+.skill-icon.mysql   { color: #00758f; }
+.skill-icon.resp    { color: var(--primary); }
+.skill-icon.git     { color: #f05032; }
+.skill-icon.server  { color: var(--accent); }
+.skill-icon.a11y    { color: var(--accent); }
+
+.skill-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.skill-card:hover .skill-name {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Barra de progreso mejorada */
+.skill-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  animation: shimmerBar 2s ease-in-out infinite;
+}
+
+@keyframes shimmerBar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.skill-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  box-shadow: 0 0 12px rgba(59,130,246,0.5);
+}
+
+.skill-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(59,130,246,0.8);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .skills-grid { grid-template-columns: 1fr; }
+}

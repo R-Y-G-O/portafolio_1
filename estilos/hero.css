@@ -1,0 +1,517 @@
+/* =============================================
+   HERO.CSS — Sección principal / portada
+   R.Y.G.O | Ronald Yamir Gallo Oliva
+   ============================================= */
+
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  padding: 7rem 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Fondo de cuadrícula decorativa animada */
+.hero-bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(48px, 48px); }
+}
+
+.hero-content,
+.hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  animation: slideInLeft 0.8s ease;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-greeting {
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeIn 1s ease 0.2s both;
+}
+
+.hero-greeting::before {
+  content: '👋';
+  display: inline-block;
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  40%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero-name {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  color: var(--text);
+  animation: fadeIn 1s ease 0.4s both;
+}
+
+.hero-name .accent {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(20deg); }
+}
+
+.hero-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(34,197,94,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(34,197,94,0.3);
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  animation: fadeIn 1s ease 0.6s both, pulse 2s ease-in-out 2s infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(34,197,94,0.2), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.hero-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  animation: fadeIn 1s ease 0.8s both;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  animation: fadeIn 1s ease 1s both;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 0.75rem;
+  animation: fadeIn 1s ease 1.2s both;
+}
+
+.hero-socials a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-socials a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.hero-socials a:hover::before {
+  opacity: 1;
+}
+
+.hero-socials a:hover {
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-5px) rotate(360deg);
+  box-shadow: 0 8px 24px rgba(59,130,246,0.4);
+}
+
+/* ---- Tarjeta de código en el hero mejorada ---- */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  animation: slideInRight 0.8s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-card-code {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(59,130,246,0.15);
+  animation: floatCard 4s ease-in-out infinite;
+  position: relative;
+}
+
+.hero-card-code::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200% 200%;
+  border-radius: var(--radius);
+  z-index: -1;
+  animation: borderGlow 3s ease infinite;
+  opacity: 0.5;
+}
+
+@keyframes borderGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  75% { transform: translateY(-10px) rotate(-1deg); }
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #161b22;
+  border-bottom: 1px solid var(--border);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.dot.red    { background: #ff5f57; animation-delay: 0s; }
+.dot.yellow { background: #febc2e; animation-delay: 0.2s; }
+.dot.green  { background: #28c840; animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.code-filename {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero-card-code pre {
+  margin: 0;
+  padding: 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+/* ---- Flecha scroll mejorada ---- */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  animation: bounce 2s infinite;
+  z-index: 1;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.hero-scroll:hover {
+  color: var(--primary);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(12px); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 6rem;
+  }
+  .hero-desc { margin: 0 auto 2rem; }
+  .hero-btns { justify-content: center; }
+  .hero-socials { justify-content: center; }
+  .hero-visual { order: -1; }
+  .hero-card-code { max-width: 360px; }
+  .hero-scroll { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-card-code { font-size: 0.75rem; }
+}
+
+/* ---- Sección Sobre mí mejorada ---- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.about-avatar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar-placeholder {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: #fff;
+  box-shadow: 0 0 60px rgba(59,130,246,0.4);
+  animation: avatarPulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+.avatar-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200% 200%;
+  animation: borderGlow 3s ease infinite;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+@keyframes avatarPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.about-badge {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.about-text p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-size: 1.02rem;
+}
+.about-text strong { 
+  color: var(--text);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-num {
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.stat-pct {
+  font-size: 1.4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ---- Stack de tecnologías en Sobre mí mejorado ---- */
+.about-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.stack-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(59,130,246,0.1);
+  color: var(--primary);
+  border: 1px solid rgba(59,130,246,0.25);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.stack-tag:hover {
+  background: rgba(59,130,246,0.2);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+}
+
+.stack-tag--accent {
+  background: rgba(34,197,94,0.1);
+  color: var(--accent);
+  border-color: rgba(34,197,94,0.25);
+}
+.stack-tag--accent:hover { 
+  background: rgba(34,197,94,0.2);
+  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+}
+
+.stack-tag--muted {
+  background: rgba(148,163,184,0.08);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+.stack-tag--muted:hover { 
+  background: rgba(148,163,184,0.15);
+  box-shadow: 0 4px 12px rgba(148,163,184,0.2);
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .about-avatar { margin: 0 auto; }
+  .about-tech-stack { justify-content: center; }
+}

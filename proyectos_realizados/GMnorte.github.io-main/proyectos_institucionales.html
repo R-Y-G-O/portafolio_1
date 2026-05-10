@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GMnorte Proyectos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/navbar.css">
+  <link rel="stylesheet" href="estilos/botones.css">
+  <link rel="stylesheet" href="estilos/proyectos.css">
+  <link rel="icon" href="img/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <section class="button-section">
+    <button class="arrow-button" id="botton" onclick="toggleButtons(false)">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    
+    <div id="button-container"></div>
+    <button class="arrow-button" id="botton" onclick="toggleButtons(true)">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </section>
+  
+  <section id="project-section" class="project-section">
+    <div id="project-content" class="project-content">
+      <h1 id="project-title" class="project-title"></h1>
+      <div class="carousel-container">
+        <div id="carousel-slide" class="carousel-slide">
+          <!-- Imágenes del carrusel -->
+        </div>
+        <button class="carousel-control left" id="botton" onclick="moveCarousel(-1)">&#10094;</button>
+        <button class="carousel-control right" id="botton"onclick="moveCarousel(1)">&#10095;</button>
+      </div>
+      <div id="project-details" class="project-details"></div>
+    </div>
+  </section>
+  
+
+  <div class="contact-area">
+    <h2><i class="fa-solid fa-envelope"></i> CONTACTANOS <i class="fa-solid fa-envelope"></i> </h2>
+    <p>¿Tienes alguna consulta o necesitas más información? No dudes en ponerte en contacto con nosotros.</p>
+    <a href="contacto.html">Envíanos un correo</a>
+  </div>
+
+  <a class="scroll-to-top" title="Volver arriba">
+    <i class="fas fa-chevron-up"></i>
+  </a>  
+  <a href="https://wa.me/981092552" class="whatsapp-icon" target="_blank" title="Chat con nosotros en WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+  </a>
+  <footer>
+    <div id="pie-container"></div>
+  </footer>
+
+  <script>
+    const buttonSets = [
+      [
+        { text: '1', title: 'Construcción sala de ventas', icon: 'fa-solid fa-building', images: ['img/importante/par_1.webp', 'img/importante/par_2.webp', 'img/importante/par_3.webp'], details: { cliente: 'INMOBILIARIA BESCO', anio: '', lugar: 'PIURA', area: '', alcance: '' }},
+        { text: '2', title: 'Construcción de departamento piloto en condominio Centrika', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'INMOBILIARIA BESCO', anio: '', lugar: 'PIURA', area: '', alcance: '' }},
+        { text: '3', title: 'Construcción sala de ventas', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'INMOBILIARIA EDIFICA', anio: '', lugar: 'PIURA', area: '', alcance: '' }},
+        { text: '4', title: 'Construcción de la sede Pueblo Nuevo', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'CABLE PACIFICO', anio: '', lugar: 'PIURA', area: '', alcance: '' }},
+        { text: '5', title: 'Construcción de Estación de servicio', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'COVISOL', anio: '', lugar: 'PIURA, Peaje Bayovar', area: '', alcance: '' }},
+      ],
+      [
+        { text: '6', title: 'Construcción de Estación de servicio y tanque cisterna', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'COVISOL', anio: '', lugar: 'TRUJILLO, Peaje Pacanguilla', area: '', alcance: '' }},
+        { text: '7', title: 'Construcción de Estación de servicio', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'COVISOL', anio: '', lugar: 'CHICLAYO, Peaje Chicama', area: '', alcance: '' }},
+        { text: '8', title: 'Acondicionamiento de la Nueva Sede de SENATI', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'PIURA, (Av. Sánchez Cerro).', area: '', alcance: '' }},
+        { text: '9', title: 'Acondicionamiento de la sede de SENATI', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'CHICLAYO', area: '', alcance: '' }},
+        { text: '10', title: 'Acondicionamiento de la sede de SENATI', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'TRUJILLO', area: '', alcance: '' }},
+      ],
+      [
+        { text: '11', title: 'Mantenimiento de infraestructura y acabados', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'RENTA CAR', anio: '', lugar: 'PIURA', area:'', alcance: '' }},
+        { text: '12', title: 'Remodelación del ambiente de lactario y oficina de tutoría', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'CFP SULLANA', area: '', alcance: '' }},
+        { text: '13', title: 'Construcción del cerco perimetral', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'CFP SECHURA', area: '', alcance: '' }},
+        { text: '14', title: 'Instalación de bombas de sistema de presión constante', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'CFP SULLANA', area: '', alcance: '' }},
+        { text: '15', title: 'Construcción de la Sala de Soldadura virtual', icon: 'fa-solid fa-building', images: ['', '', ''], details: { cliente: 'SENATI', anio: '', lugar: 'CFP Talara', area: '', alcance: '' }},
+      ],
+    ];
+  
+    let currentSetIndex = 0; 
+let currentProjectIndex = 0; 
+
+// Actualiza los botones
+function updateButtonContainer() {
+  const buttonContainer = document.getElementById('button-container');
+  buttonContainer.innerHTML = '';
+
+  buttonSets[currentSetIndex].forEach((project, index) => {
+    const button = document.createElement('button');
+    button.className = 'circle-button';
+    button.id = 'botton';
+    button.innerHTML = project.text;
+    button.setAttribute('data-index', index);
+    button.title = project.title; // Añade el título como tooltip
+    button.onclick = () => showProject(index);
+    buttonContainer.appendChild(button);
+  });
+}
+
+// Muestra el proyecto correspondiente
+function showProject(index) {
+  const projectContent = document.getElementById('project-content');
+  projectContent.classList.add('fade-out');
+
+  setTimeout(() => {
+    currentProjectIndex = index; 
+    const project = buttonSets[currentSetIndex][index];
+    document.getElementById('project-title').innerHTML = `<i class="${project.icon}"></i> ${project.title} <i class="${project.icon}"></i>`;
+
+    const carouselSlide = document.getElementById('carousel-slide');
+    carouselSlide.innerHTML = ''; 
+
+    // Añade las imágenes del proyecto actual al carrusel
+    project.images.forEach((image) => {
+      const imgElement = document.createElement('img');
+      imgElement.src = image;
+      carouselSlide.appendChild(imgElement);
+    });
+
+    // Actualiza los detalles del proyecto
+    const projectDetails = document.getElementById('project-details');
+    projectDetails.innerHTML = `
+      <p><strong><i class="fa-solid fa-user"></i> Cliente:</strong> ${project.details.cliente}</p>
+      <p><strong><i class="fa-solid fa-calendar-days"></i> Año:</strong> ${project.details.anio}</p>
+      <p><strong><i class="fa-solid fa-map-marker-alt"></i> Lugar:</strong> ${project.details.Lugar}</p>
+      <p><strong><i class="fa-solid fa-ruler-combined"></i> Área:</strong> ${project.details.area}</p>
+      <p><strong><i class="fa-solid fa-chart-line"></i> Alcance:</strong> ${project.details.alcance}</p>
+    `;
+
+    // Resalta el botón actual
+    document.querySelectorAll('.circle-button').forEach((btn, i) => {
+      if (i === index) {
+        btn.classList.add('active-button');
+      } else {
+        btn.classList.remove('active-button');
+      }
+    });
+
+    // Remueve la clase de desvanecimiento después de un breve tiempo
+    setTimeout(() => {
+      projectContent.classList.remove('fade-out');
+      projectContent.classList.add('fade-in');
+    }, 50); 
+
+  }, 500);
+}
+
+
+// Cambia de proyecto al hacer clic en las flechas
+function toggleButtons(isNext) {
+  if (isNext) {
+    currentProjectIndex++;
+    if (currentProjectIndex >= buttonSets[currentSetIndex].length) {
+      currentSetIndex++;
+      if (currentSetIndex >= buttonSets.length) {
+        currentSetIndex = 0; 
+      }
+      currentProjectIndex = 0; 
+    }
+  } else {
+    currentProjectIndex--;
+    if (currentProjectIndex < 0) {
+      if (currentSetIndex > 0) {
+        currentSetIndex--;
+        currentProjectIndex = buttonSets[currentSetIndex].length - 1; 
+      } else {
+        currentProjectIndex = 0; 
+      }
+    }
+  }
+  updateButtonContainer(); 
+  showProject(currentProjectIndex);
+}
+updateButtonContainer();
+showProject(currentProjectIndex);
+  </script>
+  
+  
+
+<script>
+  let currentImageIndex = 0;
+
+  function moveCarousel(direction) {
+    const carouselSlide = document.getElementById('carousel-slide');
+    const images = carouselSlide.getElementsByTagName('img');
+    const totalImages = images.length;
+
+    currentImageIndex += direction;
+
+    if (currentImageIndex < 0) {
+      currentImageIndex = totalImages - 1;
+    } else if (currentImageIndex >= totalImages) {
+      currentImageIndex = 0;
+    }
+
+    const imageWidth = images[0].clientWidth;
+    carouselSlide.style.transform = `translateX(-${currentImageIndex * imageWidth}px)`;
+  }
+</script>
+
+<script src="js/navbar.js"></script>
+<script src="js/scroll.js" defer></script>
+
+</body>
+</html>

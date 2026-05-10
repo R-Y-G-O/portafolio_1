@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics Dashboard — R.Y.G.O</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="estilos/base.css" />
+  <link rel="stylesheet" href="estilos/sidebar.css" />
+  <link rel="stylesheet" href="estilos/topbar.css" />
+  <link rel="stylesheet" href="estilos/cards.css" />
+  <link rel="stylesheet" href="estilos/charts.css" />
+  <link rel="stylesheet" href="estilos/table.css" />
+  <link rel="stylesheet" href="estilos/widgets.css" />
+  <link rel="stylesheet" href="estilos/sections.css" />
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" style="display:flex;align-items:center;gap:.75rem;text-decoration:none;">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Analytics<strong>Pro</strong></span>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <span class="nav-group-label">Principal</span>
+        <a href="#" class="nav-item active" data-page="overview">
+          <i class="fa-solid fa-house"></i><span>Resumen</span>
+        </a>
+        <a href="#" class="nav-item" data-page="analytics">
+          <i class="fa-solid fa-chart-line"></i><span>Analíticas</span>
+        </a>
+        <a href="#" class="nav-item" data-page="reports">
+          <i class="fa-solid fa-file-chart-column"></i><span>Reportes</span>
+        </a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Gestión</span>
+        <a href="#" class="nav-item" data-page="users">
+          <i class="fa-solid fa-users"></i><span>Usuarios</span>
+          <span class="nav-badge">12</span>
+        </a>
+        <a href="#" class="nav-item" data-page="projects">
+          <i class="fa-solid fa-folder-open"></i><span>Proyectos</span>
+        </a>
+        <a href="#" class="nav-item" data-page="tasks">
+          <i class="fa-solid fa-list-check"></i><span>Tareas</span>
+          <span class="nav-badge nav-badge--warn">5</span>
+        </a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Sistema</span>
+        <a href="settings.html" class="nav-item" data-page="settings">
+          <i class="fa-solid fa-gear"></i><span>Configuración</span>
+        </a>
+        <a href="#" class="nav-item" data-page="help">
+          <i class="fa-solid fa-circle-question"></i><span>Ayuda</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">RG</div>
+      <div class="user-info">
+        <span class="user-name">Ronald Gallo</span>
+        <span class="user-role">Ing. Software</span>
+      </div>
+      <button class="user-menu-btn" title="Opciones" id="userMenuBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      <!-- Menú de usuario -->
+      <div class="user-dropdown" id="userDropdown" hidden>
+        <a href="#" class="user-dropdown-item" id="profileBtn"><i class="fa-solid fa-user"></i> Mi perfil</a>
+        <a href="settings.html" class="user-dropdown-item"><i class="fa-solid fa-gear"></i> Configuración</a>
+        <div class="user-dropdown-divider"></div>
+        <a href="#" class="user-dropdown-item user-dropdown-item--danger" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="breadcrumb">
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span class="breadcrumb-active" id="pageTitle">Resumen</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Buscar..." id="searchInput" />
+        </div>
+        <div class="topbar-actions">
+          <button class="action-btn" id="themeToggle" title="Cambiar tema" aria-label="Cambiar tema">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button class="action-btn" id="notifBtn" title="Notificaciones" aria-label="Notificaciones">
+            <i class="fa-solid fa-bell"></i>
+            <span class="action-dot"></span>
+          </button>
+          <!-- Panel de notificaciones -->
+          <div class="notif-panel" id="notifPanel" hidden>
+            <div class="notif-header">
+              <span>Notificaciones</span>
+              <button class="notif-clear" id="notifClear">Marcar todas como leídas</button>
+            </div>
+            <ul class="notif-list">
+              <li class="notif-item notif-item--unread">
+                <div class="notif-icon" style="background:#6366f120;color:#6366f1"><i class="fa-solid fa-user-plus"></i></div>
+                <div class="notif-body"><p>Ana García se registró como nuevo usuario</p><span>Hace 5 min</span></div>
+              </li>
+              <li class="notif-item notif-item--unread">
+                <div class="notif-icon" style="background:#d946ef20;color:#d946ef"><i class="fa-solid fa-cart-shopping"></i></div>
+                <div class="notif-body"><p>Carlos López completó una compra de $1,250</p><span>Hace 18 min</span></div>
+              </li>
+              <li class="notif-item notif-item--unread">
+                <div class="notif-icon" style="background:#f43f5e20;color:#f43f5e"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="notif-body"><p>Transacción #TXN-004 marcada como fallida</p><span>Hace 32 min</span></div>
+              </li>
+              <li class="notif-item">
+                <div class="notif-icon" style="background:#f59e0b20;color:#f59e0b"><i class="fa-solid fa-file-export"></i></div>
+                <div class="notif-body"><p>Reporte mensual generado y enviado</p><span>Hace 1h</span></div>
+              </li>
+              <li class="notif-item">
+                <div class="notif-icon" style="background:#06b6d420;color:#06b6d4"><i class="fa-solid fa-gear"></i></div>
+                <div class="notif-body"><p>Configuración del sistema actualizada</p><span>Hace 2h</span></div>
+              </li>
+            </ul>
+          </div>
+          <button class="action-btn" title="Exportar datos" id="exportBtn" aria-label="Exportar CSV">
+            <i class="fa-solid fa-download"></i>
+          </button>
+        </div>
+        <div class="topbar-date" id="topbarDate"></div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content" id="mainContent">
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: RESUMEN (default)
+           ══════════════════════════════════════ -->
+      <div class="page-section active" id="page-overview">
+
+      <!-- ── KPI CARDS ── -->
+      <section class="kpi-grid">
+        <div class="kpi-card" data-trend="up">
+          <div class="kpi-icon kpi-icon--blue">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="kpi-body">
+            <span class="kpi-label">Usuarios activos</span>
+            <span class="kpi-value" data-target="8472">0</span>
+            <span class="kpi-trend kpi-trend--up">
+              <i class="fa-solid fa-arrow-trend-up"></i> +12.5% este mes
+            </span>
+          </div>
+          <div class="kpi-sparkline" id="spark1"></div>
+        </div>
+
+        <div class="kpi-card" data-trend="up">
+          <div class="kpi-icon kpi-icon--green">
+            <i class="fa-solid fa-dollar-sign"></i>
+          </div>
+          <div class="kpi-body">
+            <span class="kpi-label">Ingresos</span>
+            <span class="kpi-value" data-target="94320" data-prefix="$">0</span>
+            <span class="kpi-trend kpi-trend--up">
+              <i class="fa-solid fa-arrow-trend-up"></i> +8.2% este mes
+            </span>
+          </div>
+          <div class="kpi-sparkline" id="spark2"></div>
+        </div>
+
+        <div class="kpi-card" data-trend="down">
+          <div class="kpi-icon kpi-icon--orange">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <div class="kpi-body">
+            <span class="kpi-label">Pedidos</span>
+            <span class="kpi-value" data-target="1284">0</span>
+            <span class="kpi-trend kpi-trend--down">
+              <i class="fa-solid fa-arrow-trend-down"></i> -3.1% este mes
+            </span>
+          </div>
+          <div class="kpi-sparkline" id="spark3"></div>
+        </div>
+
+        <div class="kpi-card" data-trend="up">
+          <div class="kpi-icon kpi-icon--purple">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="kpi-body">
+            <span class="kpi-label">Satisfacción</span>
+            <span class="kpi-value" data-target="96" data-suffix="%">0</span>
+            <span class="kpi-trend kpi-trend--up">
+              <i class="fa-solid fa-arrow-trend-up"></i> +2.4% este mes
+            </span>
+          </div>
+          <div class="kpi-sparkline" id="spark4"></div>
+        </div>
+      </section>
+
+      <!-- ── CHARTS ROW ── -->
+      <section class="charts-row">
+
+        <!-- Gráfica de líneas: Tráfico -->
+        <div class="chart-card chart-card--wide">
+          <div class="chart-header">
+            <div>
+              <h3 class="chart-title">Tráfico de usuarios</h3>
+              <p class="chart-subtitle">Visitas únicas por mes — 2024</p>
+            </div>
+            <div class="chart-controls">
+              <button class="chart-btn active" data-range="6m">6M</button>
+              <button class="chart-btn" data-range="3m">3M</button>
+              <button class="chart-btn" data-range="1m">1M</button>
+            </div>
+          </div>
+          <div class="chart-area">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfica de dona: Distribución -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div>
+              <h3 class="chart-title">Fuentes de tráfico</h3>
+              <p class="chart-subtitle">Distribución por canal</p>
+            </div>
+          </div>
+          <div class="chart-area chart-area--donut">
+            <canvas id="donutChart"></canvas>
+          </div>
+          <div class="donut-legend" id="donutLegend"></div>
+        </div>
+
+      </section>
+
+      <!-- ── BOTTOM ROW ── -->
+      <section class="bottom-row">
+
+        <!-- Tabla de transacciones -->
+        <div class="table-card">
+          <div class="table-header">
+            <div>
+              <h3 class="chart-title">Transacciones recientes</h3>
+              <p class="chart-subtitle">Últimas 10 operaciones</p>
+            </div>
+            <div class="table-actions">
+              <input type="text" class="table-search" placeholder="Filtrar..." id="tableFilter" />
+              <button class="btn-export" id="csvBtn" title="Exportar CSV">
+                <i class="fa-solid fa-file-csv"></i> CSV
+              </button>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" id="dataTable">
+              <thead>
+                <tr>
+                  <th data-col="id">ID <i class="fa-solid fa-sort"></i></th>
+                  <th data-col="user">Usuario <i class="fa-solid fa-sort"></i></th>
+                  <th data-col="type">Tipo <i class="fa-solid fa-sort"></i></th>
+                  <th data-col="amount">Monto <i class="fa-solid fa-sort"></i></th>
+                  <th data-col="status">Estado <i class="fa-solid fa-sort"></i></th>
+                  <th data-col="date">Fecha <i class="fa-solid fa-sort"></i></th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="tableInfo">Mostrando 0 registros</span>
+            <div class="pagination" id="pagination"></div>
+          </div>
+        </div>
+
+        <!-- Widgets laterales -->
+        <div class="widgets-col">
+
+          <!-- Progreso de metas -->
+          <div class="widget-card">
+            <h3 class="widget-title"><i class="fa-solid fa-bullseye"></i> Metas del mes</h3>
+            <div class="goals-list" id="goalsList"></div>
+          </div>
+
+          <!-- Actividad reciente -->
+          <div class="widget-card">
+            <h3 class="widget-title"><i class="fa-solid fa-clock-rotate-left"></i> Actividad reciente</h3>
+            <ul class="activity-list" id="activityList"></ul>
+          </div>
+
+        </div>
+      </section>
+
+      </div><!-- /page-overview -->
+
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: ANALÍTICAS
+           ══════════════════════════════════════ -->
+      <div class="page-section" id="page-analytics">
+        <div class="inner-page-header">
+          <h2><i class="fa-solid fa-chart-line"></i> Analíticas</h2>
+          <p>Métricas detalladas de tráfico, conversión y comportamiento de usuarios.</p>
+        </div>
+
+        <!-- KPI mini row -->
+        <div class="analytics-kpi-row">
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Tasa de rebote</span>
+            <span class="a-kpi-val" style="color:#f43f5e">38.4%</span>
+            <span class="a-kpi-sub"><i class="fa-solid fa-arrow-trend-down"></i> -2.1% vs mes anterior</span>
+          </div>
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Duración media sesión</span>
+            <span class="a-kpi-val" style="color:#06b6d4">4m 32s</span>
+            <span class="a-kpi-sub"><i class="fa-solid fa-arrow-trend-up"></i> +0.8% vs mes anterior</span>
+          </div>
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Páginas por sesión</span>
+            <span class="a-kpi-val" style="color:#6366f1">3.7</span>
+            <span class="a-kpi-sub"><i class="fa-solid fa-arrow-trend-up"></i> +5.2% vs mes anterior</span>
+          </div>
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Tasa de conversión</span>
+            <span class="a-kpi-val" style="color:#d946ef">6.2%</span>
+            <span class="a-kpi-sub"><i class="fa-solid fa-arrow-trend-up"></i> +1.4% vs mes anterior</span>
+          </div>
+        </div>
+
+        <!-- Tabla de páginas más visitadas -->
+        <div class="inner-card">
+          <div class="inner-card-header">
+            <h3><i class="fa-solid fa-ranking-star"></i> Páginas más visitadas</h3>
+          </div>
+          <table class="inner-table">
+            <thead><tr><th>#</th><th>Página</th><th>Visitas</th><th>Tiempo medio</th><th>Rebote</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>/inicio</td><td>3,842</td><td>2m 14s</td><td><span class="badge badge--success">28%</span></td></tr>
+              <tr><td>2</td><td>/productos</td><td>2,610</td><td>4m 02s</td><td><span class="badge badge--pending">41%</span></td></tr>
+              <tr><td>3</td><td>/contacto</td><td>1,920</td><td>1m 48s</td><td><span class="badge badge--success">33%</span></td></tr>
+              <tr><td>4</td><td>/blog</td><td>1,540</td><td>5m 30s</td><td><span class="badge badge--success">22%</span></td></tr>
+              <tr><td>5</td><td>/precios</td><td>980</td><td>3m 10s</td><td><span class="badge badge--failed">58%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dispositivos -->
+        <div class="inner-card">
+          <div class="inner-card-header">
+            <h3><i class="fa-solid fa-mobile-screen"></i> Dispositivos</h3>
+          </div>
+          <div class="device-bars">
+            <div class="device-row">
+              <span><i class="fa-solid fa-mobile-screen"></i> Móvil</span>
+              <div class="device-bar-wrap"><div class="device-bar-fill" style="width:62%;background:#6366f1"></div></div>
+              <span>62%</span>
+            </div>
+            <div class="device-row">
+              <span><i class="fa-solid fa-desktop"></i> Escritorio</span>
+              <div class="device-bar-wrap"><div class="device-bar-fill" style="width:30%;background:#d946ef"></div></div>
+              <span>30%</span>
+            </div>
+            <div class="device-row">
+              <span><i class="fa-solid fa-tablet-screen-button"></i> Tablet</span>
+              <div class="device-bar-wrap"><div class="device-bar-fill" style="width:8%;background:#f59e0b"></div></div>
+              <span>8%</span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /page-analytics -->
+
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: REPORTES
+           ══════════════════════════════════════ -->
+      <div class="page-section" id="page-reports">
+        <div class="inner-page-header">
+          <h2><i class="fa-solid fa-file-chart-column"></i> Reportes</h2>
+          <p>Genera y descarga reportes de actividad, ventas y usuarios.</p>
+        </div>
+
+        <div class="reports-grid">
+          <div class="report-card">
+            <div class="report-icon" style="background:#6366f120;color:#6366f1"><i class="fa-solid fa-file-csv"></i></div>
+            <div class="report-info">
+              <strong>Transacciones del mes</strong>
+              <span>CSV · Actualizado hoy</span>
+            </div>
+            <button class="report-btn" onclick="exportCSV()"><i class="fa-solid fa-download"></i> Descargar</button>
+          </div>
+          <div class="report-card">
+            <div class="report-icon" style="background:#d946ef20;color:#d946ef"><i class="fa-solid fa-file-pdf"></i></div>
+            <div class="report-info">
+              <strong>Resumen ejecutivo</strong>
+              <span>PDF · Diciembre 2024</span>
+            </div>
+            <button class="report-btn" onclick="showReportToast('Resumen ejecutivo generado')"><i class="fa-solid fa-download"></i> Descargar</button>
+          </div>
+          <div class="report-card">
+            <div class="report-icon" style="background:#f59e0b20;color:#f59e0b"><i class="fa-solid fa-chart-bar"></i></div>
+            <div class="report-info">
+              <strong>Analíticas de tráfico</strong>
+              <span>CSV · Últimos 6 meses</span>
+            </div>
+            <button class="report-btn" onclick="showReportToast('Reporte de tráfico generado')"><i class="fa-solid fa-download"></i> Descargar</button>
+          </div>
+          <div class="report-card">
+            <div class="report-icon" style="background:#06b6d420;color:#06b6d4"><i class="fa-solid fa-users"></i></div>
+            <div class="report-info">
+              <strong>Reporte de usuarios</strong>
+              <span>CSV · Diciembre 2024</span>
+            </div>
+            <button class="report-btn" onclick="showReportToast('Reporte de usuarios generado')"><i class="fa-solid fa-download"></i> Descargar</button>
+          </div>
+        </div>
+
+        <div class="inner-card" style="margin-top:1.25rem">
+          <div class="inner-card-header">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial de reportes</h3>
+          </div>
+          <table class="inner-table">
+            <thead><tr><th>Reporte</th><th>Tipo</th><th>Generado</th><th>Tamaño</th><th>Acción</th></tr></thead>
+            <tbody>
+              <tr><td>Transacciones Nov 2024</td><td><span class="type-badge">CSV</span></td><td>01 Dic 2024</td><td>48 KB</td><td><button class="report-btn-sm" onclick="showReportToast('Descargando...')"><i class="fa-solid fa-download"></i></button></td></tr>
+              <tr><td>Resumen Oct 2024</td><td><span class="type-badge">PDF</span></td><td>01 Nov 2024</td><td>210 KB</td><td><button class="report-btn-sm" onclick="showReportToast('Descargando...')"><i class="fa-solid fa-download"></i></button></td></tr>
+              <tr><td>Usuarios Q3 2024</td><td><span class="type-badge">CSV</span></td><td>01 Oct 2024</td><td>32 KB</td><td><button class="report-btn-sm" onclick="showReportToast('Descargando...')"><i class="fa-solid fa-download"></i></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div><!-- /page-reports -->
+
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: USUARIOS
+           ══════════════════════════════════════ -->
+      <div class="page-section" id="page-users">
+        <div class="inner-page-header">
+          <h2><i class="fa-solid fa-users"></i> Usuarios</h2>
+          <p>Gestión y seguimiento de usuarios registrados en la plataforma.</p>
+        </div>
+
+        <div class="analytics-kpi-row">
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Total usuarios</span>
+            <span class="a-kpi-val" style="color:#6366f1">8,472</span>
+            <span class="a-kpi-sub">Registrados</span>
+          </div>
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Activos hoy</span>
+            <span class="a-kpi-val" style="color:#06b6d4">1,284</span>
+            <span class="a-kpi-sub"><i class="fa-solid fa-circle" style="color:#22c55e;font-size:.5rem"></i> En línea</span>
+          </div>
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Nuevos este mes</span>
+            <span class="a-kpi-val" style="color:#d946ef">342</span>
+            <span class="a-kpi-sub"><i class="fa-solid fa-arrow-trend-up"></i> +12.5%</span>
+          </div>
+          <div class="a-kpi-card">
+            <span class="a-kpi-label">Tasa retención</span>
+            <span class="a-kpi-val" style="color:#f59e0b">78%</span>
+            <span class="a-kpi-sub">Mensual</span>
+          </div>
+        </div>
+
+        <div class="inner-card">
+          <div class="inner-card-header">
+            <h3><i class="fa-solid fa-list"></i> Lista de usuarios</h3>
+            <input type="text" class="inner-search" id="userSearch" placeholder="Buscar usuario..." oninput="filterUsers(this.value)" />
+          </div>
+          <table class="inner-table" id="usersTable">
+            <thead><tr><th>Usuario</th><th>Email</th><th>Rol</th><th>Estado</th><th>Registro</th></tr></thead>
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+      </div><!-- /page-users -->
+
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: PROYECTOS
+           ══════════════════════════════════════ -->
+      <div class="page-section" id="page-projects">
+        <div class="inner-page-header">
+          <h2><i class="fa-solid fa-folder-open"></i> Proyectos</h2>
+          <p>Estado y progreso de los proyectos activos.</p>
+        </div>
+
+        <div class="projects-inner-grid" id="projectsGrid"></div>
+      </div><!-- /page-projects -->
+
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: TAREAS
+           ══════════════════════════════════════ -->
+      <div class="page-section" id="page-tasks">
+        <div class="inner-page-header">
+          <h2><i class="fa-solid fa-list-check"></i> Tareas</h2>
+          <p>Seguimiento de tareas pendientes y completadas.</p>
+        </div>
+
+        <div class="tasks-toolbar">
+          <div class="tasks-filters">
+            <button class="task-filter-btn active" data-filter="all">Todas</button>
+            <button class="task-filter-btn" data-filter="pending">Pendientes</button>
+            <button class="task-filter-btn" data-filter="progress">En progreso</button>
+            <button class="task-filter-btn" data-filter="done">Completadas</button>
+          </div>
+          <button class="btn-add-task" id="addTaskBtn"><i class="fa-solid fa-plus"></i> Nueva tarea</button>
+        </div>
+
+        <div class="tasks-list" id="tasksList"></div>
+
+        <!-- Modal nueva tarea -->
+        <div class="task-modal-overlay" id="taskModalOverlay" hidden>
+          <div class="task-modal">
+            <div class="task-modal-header">
+              <h3><i class="fa-solid fa-plus"></i> Nueva tarea</h3>
+              <button class="task-modal-close" id="taskModalClose"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="task-modal-body">
+              <label>Título</label>
+              <input type="text" id="newTaskTitle" placeholder="Nombre de la tarea..." />
+              <label>Prioridad</label>
+              <select id="newTaskPriority">
+                <option value="high">Alta</option>
+                <option value="medium" selected>Media</option>
+                <option value="low">Baja</option>
+              </select>
+              <label>Asignado a</label>
+              <input type="text" id="newTaskAssignee" placeholder="Nombre del responsable..." />
+            </div>
+            <div class="task-modal-footer">
+              <button class="btn-cancel-task" id="taskModalCancel">Cancelar</button>
+              <button class="btn-save-task" id="taskModalSave"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /page-tasks -->
+
+
+      <!-- ══════════════════════════════════════
+           SECCIÓN: AYUDA
+           ══════════════════════════════════════ -->
+      <div class="page-section" id="page-help">
+        <div class="inner-page-header">
+          <h2><i class="fa-solid fa-circle-question"></i> Ayuda y soporte</h2>
+          <p>Documentación, preguntas frecuentes y contacto con el desarrollador.</p>
+        </div>
+
+        <div class="help-grid">
+
+          <!-- FAQ -->
+          <div class="inner-card help-faq">
+            <div class="inner-card-header">
+              <h3><i class="fa-solid fa-question-circle"></i> Preguntas frecuentes</h3>
+            </div>
+            <div class="faq-list" id="faqList">
+              <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                  ¿Cómo exportar los datos de la tabla? <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-a">Haz clic en el botón <strong>CSV</strong> en la sección de Transacciones o en el ícono de descarga en la topbar. Se descargará un archivo con todos los registros filtrados.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                  ¿Cómo cambiar el tema claro/oscuro? <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-a">Usa el botón de luna/sol en la barra superior, o ve a <strong>Configuración → Apariencia → Tema</strong> para guardarlo de forma permanente.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                  ¿Cómo personalizar los colores del dashboard? <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-a">Ve a <strong>Configuración</strong> desde el sidebar. Ahí puedes cambiar el color de acento, colores de gráficas, densidad de la interfaz y más.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                  ¿Los datos son reales? <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-a">No, todos los datos mostrados son simulados con fines demostrativos. Este es un proyecto de portafolio estático.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                  ¿Puedo integrar este dashboard con un backend? <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-a">Sí. El dashboard está diseñado para ser fácilmente adaptable. Los datos en <code>data.js</code> pueden reemplazarse por llamadas a una API REST o endpoints de Laravel.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Creado por -->
+          <div class="inner-card help-author">
+            <div class="author-logo-wrap">
+              <div class="author-logo">
+                <span class="logo-bracket">&lt;</span>R.Y.G.O<span class="logo-bracket">/&gt;</span>
+              </div>
+              <span class="author-badge"><i class="fa-solid fa-code"></i> Ing. Software</span>
+            </div>
+            <h3 class="author-name">Ronald Yamir Gallo Oliva</h3>
+            <p class="author-desc">
+              Desarrollador de software especializado en interfaces web modernas, dashboards interactivos
+              y sistemas full stack con Laravel. Este proyecto fue construido como parte de mi portafolio profesional.
+            </p>
+            <div class="author-stack">
+              <span><i class="fa-brands fa-html5"></i> HTML5</span>
+              <span><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+              <span><i class="fa-brands fa-js"></i> JavaScript</span>
+              <span><i class="fa-solid fa-chart-line"></i> Chart.js</span>
+            </div>
+            <div class="author-contact">
+              <a href="mailto:ronald@email.com" class="author-contact-btn">
+                <i class="fa-solid fa-envelope"></i> ronald@email.com
+              </a>
+              <a href="https://wa.me/51983585671" target="_blank" class="author-contact-btn">
+                <i class="fa-brands fa-whatsapp"></i> +51 983 585 671
+              </a>
+              <a href="https://github.com/rygo" target="_blank" class="author-contact-btn">
+                <i class="fa-brands fa-github"></i> github.com/rygo
+              </a>
+              <a href="https://linkedin.com/in/rygo" target="_blank" class="author-contact-btn">
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+            </div>
+            <div class="author-message">
+              <i class="fa-solid fa-comment-dots"></i>
+              <p>¿Tienes un proyecto en mente o quieres colaborar? Escríbeme directamente, respondo en menos de 24 horas.</p>
+            </div>
+            <div class="author-footer">
+              <span><i class="fa-solid fa-copyright"></i> 2024 R.Y.G.O — Analytics Dashboard</span>
+              <span>v1.0.0</span>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /page-help -->
+
+    </main>
+  </div>
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

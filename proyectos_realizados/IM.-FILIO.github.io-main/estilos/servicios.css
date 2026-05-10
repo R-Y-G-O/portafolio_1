@@ -1,0 +1,139 @@
+/* =============================================
+   SERVICIOS.CSS — IM. FILIO
+   Mejorado por R.Y.G.O
+   ============================================= */
+
+html { background-color: #f0f7e6; }
+
+body {
+  background: transparent;
+  min-height: 100vh;
+}
+
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('t.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.nuestros-servicios { margin-top: 7rem; }
+
+.nuestros-servicios > h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.nuestros-servicios > h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green), var(--green-bright));
+  border-radius: 2px;
+}
+
+/* ---- Tarjeta de servicio ---- */
+.servicio {
+  background: var(--white);
+  padding: 2rem;
+  margin-bottom: 1.75rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.servicio:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.servicio h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.servicio p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+/* ---- Carrusel de servicios ---- */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-image {
+  min-width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.carousel-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: url(../img/maus/pointer.png), pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.carousel-dot.active,
+.carousel-dot:hover {
+  background: var(--white);
+  transform: scale(1.3);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .container { padding: 0 1rem 3rem; }
+  .nuestros-servicios { margin-top: 5.5rem; }
+  .servicio { padding: 1.5rem; }
+  .carousel-image { height: 170px; }
+}

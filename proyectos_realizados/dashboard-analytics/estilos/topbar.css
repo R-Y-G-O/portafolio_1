@@ -1,0 +1,269 @@
+/* =============================================
+   TOPBAR.CSS
+   Dashboard Analytics — R.Y.G.O
+   ============================================= */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* ---- Izquierda ---- */
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar-toggle {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.sidebar-toggle:hover { background: var(--bg-3); color: var(--text); }
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-3);
+}
+.breadcrumb i { font-size: 0.6rem; }
+.breadcrumb-active { color: var(--text); font-weight: 600; }
+
+/* ---- Derecha ---- */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.85rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.search-box:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+.search-box i { color: var(--text-3); font-size: 0.85rem; }
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  width: 180px;
+}
+.search-box input::placeholder { color: var(--text-3); }
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.action-btn {
+  position: relative;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  font-size: 0.95rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.action-btn:hover { background: var(--bg-3); color: var(--text); }
+
+.action-dot {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 7px; height: 7px;
+  background: var(--red);
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+}
+
+.topbar-date {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--border);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .search-box { display: none; }
+  .topbar-date { display: none; }
+  .topbar { padding: 0 1rem; }
+}
+
+/* ---- Panel de notificaciones ---- */
+.notif-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 200;
+  overflow: hidden;
+  animation: fadeDown 0.18s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.notif-clear {
+  font-size: 0.75rem;
+  color: var(--blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity var(--transition);
+}
+.notif-clear:hover { opacity: 0.75; }
+.notif-clear:disabled { color: var(--text-3); cursor: default; }
+
+.notif-list { padding: 0.4rem 0; }
+
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  transition: background var(--transition);
+  cursor: default;
+}
+.notif-item:hover { background: var(--bg-3); }
+
+.notif-item--unread { background: var(--bg-3); }
+.notif-item--unread::before {
+  content: '';
+  display: block;
+  width: 6px; height: 6px;
+  background: var(--blue);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.notif-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.notif-body p {
+  font-size: 0.8rem;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.notif-body span {
+  font-size: 0.72rem;
+  color: var(--text-3);
+}
+
+/* Posición relativa para el contenedor de acciones */
+.topbar-actions { position: relative; }
+
+/* ---- Menú desplegable de usuario ---- */
+.sidebar-user { position: relative; }
+
+.user-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 200;
+  overflow: hidden;
+  min-width: 180px;
+  animation: fadeDown 0.18s ease;
+}
+
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-2);
+  transition: background var(--transition), color var(--transition);
+  cursor: pointer;
+}
+.user-dropdown-item:hover { background: var(--bg-3); color: var(--text); }
+.user-dropdown-item--danger { color: var(--red); }
+.user-dropdown-item--danger:hover { background: rgba(244,63,94,0.1); color: var(--red); }
+
+.user-dropdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.25rem 0;
+}
+
+/* ---- Toast (index.html) ---- */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.toast i { color: var(--blue); }
+.toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }

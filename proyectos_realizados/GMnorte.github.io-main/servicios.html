@@ -1,0 +1,139 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Servicios - GM Norte 2024</title>
+    <link rel="stylesheet" href="estilos/estilo.css">
+    <link rel="stylesheet" href="estilos/navbar.css">
+    <link rel="stylesheet" href="estilos/botones.css">
+    <link rel="stylesheet" href="estilos/servicios.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="icon" href="img/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="container">
+        <section class="nuestros-servicios">
+            <h2>NUESTROS SERVICIOS</h2>
+            <div class="servicio">
+                <h3><i class="fas fa-paint-brush" id="icon"></i>DISEÑO<i class="fas fa-paint-brush" id="icon_gi"></i></h3>
+                <p>Edificaciones de tipo vivienda, comercio y salud. Elaboramos el proyecto desde el diseño conceptual, técnico, normativo hasta el nivel de acabados.
+                    Trabajamos el sistema más versátil del mercado en todas sus variedades y acabados tanto interiores y exteriores, así como falso cielo raso en los diversos sistemas.
+                </p>
+                <div class="carousel">
+                    <div class="carousel-images">
+                        <img src="img/importante/par_1.webp" alt="Imagen de diseño 1" class="carousel-image">
+                        <img src="img/importante/par_2.webp" alt="Imagen de diseño 2" class="carousel-image">
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="servicio">
+                <h3><i class="fa-solid fa-person-digging" id="icon"></i>CONSTRUCCIÓN<i class="fa-solid fa-person-digging" id="icon_gi"></i></h3>
+                <p>Construcción de infraestructura general, llevando el proyecto de inicio a fin, desde la excavación, estructuras, instalaciones, arquitectura hasta acabados interiores.
+                    Construcción de estructuras de concreto desde la fase inicial. Tenemos experiencia en cimentaciones, calzaduras, prefabricados, sistemas alternativos.
+                </p>
+                <div class="carousel">
+                    <div class="carousel-images">
+                        <img src="img/importante/par_1.webp" alt="Imagen de diseño 1" class="carousel-image">
+                        <img src="img/importante/par_2.webp" alt="Imagen de diseño 2" class="carousel-image">
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="servicio">
+                <h3><i class="fa-solid fa-screwdriver-wrench" id="icon"></i>REMODELACIÓN Y AMPLIACIÓN<i class="fa-solid fa-screwdriver-wrench" id="icon_gi"></i></h3>
+                <p>A requerimiento del cliente, según la necesidad, se ejecutan proyectos sobre una edificación ya existente incluyendo todas las especialidades hasta el acabado final.
+                    Trabajamos redes de agua fría y caliente en convencional, el sistema de termofusión, y redes de cobre. Instalación y operatividad de bombas de presión, sumergibles, etc.
+                </p>
+                <div class="carousel">
+                    <div class="carousel-images">
+                        <img src="img/importante/par_1.webp" alt="Imagen de diseño 1" class="carousel-image">
+                        <img src="img/importante/par_2.webp" alt="Imagen de diseño 2" class="carousel-image">
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="servicio">
+                <h3><i class="fa-solid fa-pen-ruler" id="icon"></i>ACABADOS INTERIORES<i class="fa-solid fa-pen-ruler" id="icon_gi"></i></h3>
+                <p>Según el diseño, se ejecuta el proyecto a nivel de mobiliario, acabados e instalaciones especiales que garantizan la calidad de la intervención. Contamos con 
+                    personal calificado en carpintería, mobiliario en acero inoxidable, melanina, enchapes en cerámico, porcelanato, acabados en granito, mármol y cuarzo.
+                </p>
+                <div class="carousel">
+                    <div class="carousel-images">
+                        <img src="img/importante/par_1.webp" alt="Imagen de diseño 1" class="carousel-image">
+                        <img src="img/importante/par_2.webp" alt="Imagen de diseño 2" class="carousel-image">
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    <div class="contact-area">
+        <h2><i class="fa-solid fa-envelope"></i> CONTACTANOS <i class="fa-solid fa-envelope"></i></h2>
+        <p>¿Tienes alguna consulta o necesitas más información? No dudes en ponerte en contacto con nosotros.</p>
+        <a href="contacto.html">Envíanos un correo</a>
+    </div>
+    <a class="scroll-to-top" title="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </a>    
+    <a href="https://wa.me/981092552" class="whatsapp-icon" target="_blank" title="Chat con nosotros en WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <footer>
+        <div id="pie-container"></div>
+    </footer>
+
+    <script src="js/scroll.js" defer></script>  
+    <script src="js/navbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const carousels = document.querySelectorAll('.carousel');
+
+    carousels.forEach(carousel => {
+        const slides = carousel.querySelectorAll('.carousel-image');
+        const dots = carousel.querySelectorAll('.carousel-dot');
+        let index = 0;
+
+        function showSlide(n) {
+            index = (n + slides.length) % slides.length;
+            carousel.querySelector('.carousel-images').style.transform = `translateX(${-index * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        }
+
+        function nextSlide() {
+            showSlide(index + 1);
+        }
+
+        function prevSlide() {
+            showSlide(index - 1);
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => showSlide(i));
+        });
+
+        showSlide(index);
+        setInterval(nextSlide, 3000);
+    });
+});
+
+    </script>
+    
+</body>
+</html>

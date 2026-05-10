@@ -1,0 +1,193 @@
+/* =============================================
+   NOSOTROS.CSS — IM. FILIO
+   Mejorado por R.Y.G.O
+   ============================================= */
+
+html { background-color: #f0f7e6; }
+
+body {
+  background: transparent;
+  min-height: 100vh;
+}
+
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('t.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ---- Contenedor ---- */
+.nosotros-container {
+  max-width: 1000px;
+  margin: 9rem auto 4rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: none;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: nosotros-fadeIn 0.7s ease-out;
+}
+
+@keyframes nosotros-fadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nosotros-content { padding: 0; }
+
+.nosotros-section {
+  padding: 2.5rem 2.5rem 2rem;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: center;
+  animation: nosotros-slideUp 0.6s ease-out;
+}
+.nosotros-section:last-child { border-bottom: none; }
+
+@keyframes nosotros-slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Títulos */
+.nosotros-h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+
+.nosotros-h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green), var(--green-bright));
+  border-radius: 2px;
+}
+
+.nosotros-p {
+  color: var(--text-muted);
+  font-size: 0.97rem;
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto 1rem;
+}
+
+/* ---- Carrusel ---- */
+.nosotros-carousel-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin: 1.25rem auto 0;
+  max-width: 520px;
+  box-shadow: var(--shadow-md);
+}
+
+.nosotros-carousel-slide {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nosotros-carousel-slide img {
+  min-width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.nosotros-indicators {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.nosotros-indicator {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: url(../img/maus/pointer.png), pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.nosotros-active,
+.nosotros-indicator:hover {
+  background: var(--white);
+  transform: scale(1.3);
+}
+
+/* ---- Misión / Visión ---- */
+.nosotros-animated-background {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  padding: 0;
+  border: none;
+}
+.nosotros-animated-background:hover { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+
+/* ---- Estadísticas ---- */
+.nosotros-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+}
+
+.nosotros-stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+  transition: transform var(--transition);
+}
+.nosotros-stat-item:hover { transform: translateY(-4px); }
+
+.nosotros-stat-item i {
+  font-size: 2rem;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 0.5rem;
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+}
+
+.nosotros-stat-item span {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.nosotros-stat-item p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .nosotros-container { margin: 5.5rem 1rem 3rem; }
+  .nosotros-section { padding: 1.75rem 1.5rem 1.5rem; }
+  .nosotros-stats { padding: 2rem 1.5rem; }
+  .nosotros-stat-item span { font-size: 2rem; }
+  .nosotros-carousel-slide img { height: 200px; }
+}

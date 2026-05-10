@@ -1,0 +1,151 @@
+/* =============================================
+   FOOTER.CSS — Pie de página
+   R.Y.G.O | Ronald Yamir Gallo Oliva
+   ============================================= */
+
+.footer {
+  background: #080f1e;
+  border-top: 1px solid var(--border);
+}
+
+/* ---- Parte superior ---- */
+.footer-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+}
+
+/* Marca */
+.footer-brand .nav-logo {
+  font-size: 1.6rem;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+.footer-brand p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Columnas de links */
+.footer-links h4,
+.footer-projects h4,
+.footer-social h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.footer-links ul,
+.footer-projects ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a,
+.footer-projects a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+.footer-links a:hover,
+.footer-projects a:hover {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+/* Redes sociales */
+.social-icons {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+.social-icons a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(59,130,246,0.1);
+  transform: translateY(-3px);
+}
+
+/* ---- Parte inferior / marca de agua ---- */
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.watermark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.watermark strong { color: var(--text); }
+
+.watermark-tag {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: rgba(59,130,246,0.1);
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+.copyright {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .watermark { justify-content: center; }
+}

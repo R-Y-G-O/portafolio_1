@@ -1,0 +1,184 @@
+/* =============================================
+   CONTACT.CSS — Sección de contacto
+   R.Y.G.O | Ronald Yamir Gallo Oliva
+   ============================================= */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ---- Layout solo info (sin formulario) ---- */
+.contact-solo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ---- Info de contacto mejorada ---- */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.3rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.contact-item:hover::before {
+  transform: scaleY(1);
+}
+
+.contact-item:hover {
+  border-color: rgba(59,130,246,0.5);
+  transform: translateX(8px);
+  box-shadow: 0 8px 24px rgba(59,130,246,0.2);
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(59,130,246,0.3));
+}
+
+.contact-item:hover .contact-icon {
+  transform: scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 4px 8px rgba(59,130,246,0.5));
+}
+
+.contact-item strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+.contact-item p {
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.contact-item:hover p {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Formulario mejorado ---- */
+.contact-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.3s ease;
+}
+
+.form-group:focus-within label {
+  color: var(--primary);
+}
+
+.form-group input,
+.form-group textarea {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  transition: all var(--transition);
+  resize: vertical;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+  transform: translateY(-2px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  text-align: center;
+  min-height: 1.2em;
+  color: var(--accent);
+  font-weight: 600;
+  animation: fadeIn 0.3s ease;
+}
+.form-note.error { color: #f87171; }
+
+/* ---- Responsive ---- */
+@media (max-width: 860px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto — GMnorte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="estilos/estilo.css">
+    <link rel="stylesheet" href="estilos/navbar.css">
+    <link rel="stylesheet" href="estilos/botones.css">
+    <link rel="stylesheet" href="estilos/contacto.css">
+    <link rel="icon" href="img/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="container">
+        <div class="flex-container">
+
+            <!-- ===== FORMULARIO ===== -->
+            <div class="contact-form">
+                <h2><i class="fas fa-paper-plane"></i> Envíanos un mensaje</h2>
+                <form id="contact-form">
+                    <input type="text" name="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
+                    <div class="input-container">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="name" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="input-container">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Correo electrónico" required>
+                    </div>
+                    <div class="input-container">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" name="phone" placeholder="Teléfono" required>
+                    </div>
+                    <div class="input-container">
+                        <i class="fas fa-tag"></i>
+                        <input type="text" name="subject" placeholder="Asunto" required>
+                    </div>
+                    <div class="input-container">
+                        <i class="fas fa-comment"></i>
+                        <textarea name="message" placeholder="Cuéntanos sobre tu proyecto..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Enviar mensaje
+                    </button>
+                    <p id="form-feedback" style="text-align:center;margin-top:.75rem;font-size:.88rem;min-height:1.2em;"></p>
+                </form>
+            </div>
+
+            <!-- ===== FAQ ===== -->
+            <div class="faq-section">
+                <h2><i class="fas fa-circle-question"></i> Preguntas frecuentes</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span><i class="fas fa-headset"></i> ¿Cómo puedo contactarme con atención al cliente?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Puedes contactarte llamando al <strong>981 092 552</strong> o enviando un correo a <strong>administracion@gmnorte.com</strong>. Respondemos en menos de 24 horas hábiles.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span><i class="far fa-clock"></i> ¿Cuál es el horario de atención?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Atendemos de <strong>lunes a viernes de 9:00 am a 6:00 pm</strong>. Para urgencias puedes escribirnos por WhatsApp.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span><i class="fas fa-map-marker-alt"></i> ¿Dónde están ubicados?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nuestra sede principal está en <strong>Avenida Vice N°282, Urb. Santa Ana — Piura, Perú</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span><i class="fas fa-building"></i> ¿Qué tipos de edificaciones construyen?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nos especializamos en edificaciones <strong>educativas, comerciales, recreativas, inmobiliarias y de salud</strong>, con amplia experiencia en este último sector.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span><i class="fas fa-star"></i> ¿Tienen experiencia en el mercado nacional?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, contamos con más de <strong>260 obras entregadas</strong> a nivel nacional, trabajando con clientes como AUNA, SENATI, BESCO y EDIFICA.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span><i class="fas fa-file-invoice"></i> ¿Cómo puedo solicitar un presupuesto?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Envíanos un correo a <strong>proyectos@gmnorte.com</strong> o completa el formulario de contacto. Te responderemos con un presupuesto personalizado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <a class="scroll-to-top" title="Volver arriba" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <a href="https://wa.me/981092552" class="whatsapp-icon" target="_blank" title="Chat en WhatsApp" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <div id="pie-container"></div>
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() { emailjs.init(''); })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+
+            if (this.honeypot.value) return;
+
+            const maxSub = 5, timeLimit = 60000, now = Date.now();
+            let count = +localStorage.getItem('submissionCount') || 0;
+            let first = +localStorage.getItem('firstSubmissionTime') || 0;
+
+            if (first && now - first > timeLimit) {
+                count = 0;
+                localStorage.removeItem('firstSubmissionTime');
+            }
+            if (count >= maxSub) {
+                feedback.style.color = '#ef4444';
+                feedback.textContent = 'Límite de envíos alcanzado. Inténtalo más tarde.';
+                return;
+            }
+
+            count++;
+            localStorage.setItem('submissionCount', count);
+            if (!first) localStorage.setItem('firstSubmissionTime', now);
+
+            emailjs.sendForm('', '', this)
+                .then(() => {
+                    feedback.style.color = 'var(--green-dark)';
+                    feedback.textContent = '✓ ¡Mensaje enviado correctamente!';
+                    this.reset();
+                }, (err) => {
+                    feedback.style.color = '#ef4444';
+                    feedback.textContent = 'Error al enviar. Inténtalo de nuevo.';
+                    console.error(err);
+                });
+        });
+
+        /* FAQ accordion */
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+    </script>
+    <script src="js/navbar.js"></script>
+    <script src="js/scroll.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+/* =============================================
+   MODAL.CSS — Modal de detalle de proyecto
+   R.Y.G.O | Ronald Yamir Gallo Oliva
+   ============================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 15, 30, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 640px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-lg);
+}
+.modal-overlay.open .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 1;
+}
+.modal-close:hover {
+  background: #f87171;
+  border-color: #f87171;
+  color: #fff;
+}
+
+/* Media del modal */
+.modal-media {
+  height: 200px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-img-placeholder {
+  font-size: 5rem;
+  color: var(--primary);
+  opacity: 0.35;
+}
+
+.modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-badge {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.modal-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Lista de características */
+.modal-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.modal-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.modal-features li i {
+  color: var(--accent);
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+/* Tags de tecnología en modal */
+.modal-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .modal-body { padding: 1.25rem; }
+  .modal-title { font-size: 1.25rem; }
+}
+
+/* =============================================
+   MODAL DE VIDEO / DEMO
+   ============================================= */
+.modal--video {
+  max-width: 860px;
+  width: calc(100vw - 2rem);
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Altura máxima con margen para que la X siempre sea visible */
+  max-height: min(92vh, 700px);
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+  flex-shrink: 0;
+  /* Siempre visible arriba */
+  position: relative;
+  z-index: 2;
+}
+
+.video-modal-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 120px);
+}
+
+.video-modal-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+/* ── Visor principal ── */
+.demo-viewer {
+  position: relative;
+  background: #000;
+  width: 100%;
+  flex: 1 1 auto;       /* ocupa el espacio disponible */
+  min-height: 0;        /* permite que flex lo comprima */
+  overflow: hidden;
+}
+
+/* El visor mantiene 16/9 pero nunca desborda el modal */
+.demo-viewer::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%; /* 16:9 */
+}
+
+/* Cuando el modal es muy alto, el visor no crece más de lo necesario */
+@supports (aspect-ratio: 16/9) {
+  .demo-viewer::before { display: none; }
+  .demo-viewer { aspect-ratio: 16 / 9; flex: 0 1 auto; }
+}
+
+.demo-viewer video,
+.demo-viewer img#viewerImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Para navegadores sin aspect-ratio */
+@supports not (aspect-ratio: 16/9) {
+  .demo-viewer video,
+  .demo-viewer img#viewerImg {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+/* Flechas de navegación sobre el visor */
+.viewer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.viewer-nav:hover {
+  background: var(--primary, #3b82f6);
+  border-color: var(--primary, #3b82f6);
+  transform: translateY(-50%) scale(1.1);
+}
+.viewer-prev { left: 0.6rem; }
+.viewer-next { right: 0.6rem; }
+
+/* Contador */
+.viewer-counter {
+  position: absolute;
+  bottom: 0.55rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Placeholder */
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: #0d1117;
+  color: var(--text-muted);
+}
+.video-placeholder i    { font-size: 2.4rem; color: var(--border); }
+.video-placeholder p    { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); }
+.video-placeholder span { font-size: 0.8rem; color: var(--text-light, #64748b); }
+.video-placeholder code {
+  background: rgba(255,255,255,0.08);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  color: var(--primary);
+}
+
+/* ── Selector de miniaturas ── */
+.demo-thumbs-section {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+  flex-shrink: 0;
+  /* Scroll suave en móvil */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.demo-thumbs-section::-webkit-scrollbar { height: 4px; }
+.demo-thumbs-section::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.demo-thumbs {
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.65rem 1rem;
+  min-width: max-content;
+}
+
+.demo-thumb {
+  flex-shrink: 0;
+  width: 100px;
+  height: 62px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: #1a1a2e;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+}
+.demo-thumb:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+}
+.demo-thumb.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
+}
+.demo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Miniatura de video */
+.demo-thumb-video {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #fff;
+}
+.demo-thumb-video i    { font-size: 1.25rem; color: var(--accent, #22c55e); }
+.demo-thumb-video span { font-size: 0.62rem; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ── Responsive ── */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .modal--video {
+    max-height: min(88vh, 560px);
+    width: calc(100vw - 1.5rem);
+  }
+  .demo-thumb { width: 84px; height: 52px; }
+  .demo-thumbs { padding: 0.55rem 0.85rem; gap: 0.45rem; }
+  .viewer-nav { width: 32px; height: 32px; font-size: 0.78rem; }
+}
+
+/* Móvil */
+@media (max-width: 480px) {
+  .modal--video {
+    max-height: 85vh;
+    width: 100vw;
+    border-radius: 12px 12px 0 0;
+    /* Anclado al fondo en móvil */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+  }
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .video-modal-header { padding: 0.75rem 1rem; }
+  .demo-thumb { width: 72px; height: 46px; }
+  .demo-thumbs { padding: 0.5rem 0.75rem; gap: 0.4rem; }
+  .viewer-nav { width: 30px; height: 30px; font-size: 0.75rem; }
+  .viewer-prev { left: 0.4rem; }
+  .viewer-next { right: 0.4rem; }
+}
+
+/* ---- Problema / Solución en modal ---- */
+.modal-problem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+
+.modal-problem-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.modal-problem-item p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(248,113,113,0.4);
+}
+
+.modal-problem-item:last-child p {
+  border-left-color: rgba(34,197,94,0.45);
+}
+
+.problem-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #f87171;
+}
+
+.problem-label--solution {
+  color: #22c55e;
+}

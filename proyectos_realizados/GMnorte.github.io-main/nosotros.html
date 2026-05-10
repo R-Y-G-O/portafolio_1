@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - GM norte</title>
+    <link rel="stylesheet" href="estilos/estilo.css">
+    <link rel="stylesheet" href="estilos/nosotros.css">
+    <link rel="stylesheet" href="estilos/botones.css">
+    <link rel="stylesheet" href="estilos/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="icon" href="img/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div id="navbar-container"></div>
+
+    <div class="nosotros-container">
+        <div class="nosotros-content">
+            <div class="nosotros-section">
+                <h2 class="nosotros-h2"><i class="fa-solid fa-book-bookmark" id="icon"></i>Filosofía Empresarial<i class="fa-solid fa-book-bookmark" id="icon_gi"></i></h2>
+                <p class="nosotros-p"> Somos una empresa dedicada al rubro de Diseño y Construcción de edificaciones de tipo: educativo, 
+                    comercial, recreativo, inmobiliario y de salud, con gran especialidad en este último. Contamos con 
+                    amplia experiencia referente al mercado nacional. Nuestro equipo está conformado por profesionales en 
+                    el sector construcción en obras de diferente tipo y envergadura.
+                </p>
+                
+                <div class="nosotros-carousel-container">
+                    <div class="nosotros-carousel-slide" id="carousel-slide">
+                        <img src="img/importante/par_1.webp" alt="Imagen 1">
+                        <img src="img/importante/par_2.webp" alt="Imagen 1">
+                        <img src="img/importante/par_3.webp" alt="Imagen 1">
+                    </div>
+                    <div class="nosotros-indicators" id="indicators">
+                        <div class="nosotros-indicator nosotros-active"></div>
+                        <div class="nosotros-indicator"></div>
+                        <div class="nosotros-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nosotros-animated-background">
+                <div class="nosotros-section">
+                    <h2 class="nosotros-h2"><i class="fa-solid fa-handshake" id="icon"></i>Misión<i class="fa-solid fa-handshake" id="icon_gi"></i></h2>
+                    <p class="nosotros-p">Nuestra misión es alcanzar la completa satisfacción de nuestros clientes cuidando la calidad con que se desarrollan nuestras 
+                        obras y haciéndolas perdurables en el tiempo. Valorar nuestros recursos humanos, inculcándoles la eficacia, 
+                        la mejora continua y la seguridad sobre los trabajos que desempeñan, así como el sentido de pertenencia a 
+                        la organización.
+                    </p>
+                </div>
+
+                <div class="nosotros-section">
+                    <h2 class="nosotros-h2"><i class="fa-solid fa-pen-nib" id="icon"></i>Visión<i class="fa-solid fa-pen-nib" id="icon_gi"></i></h2>
+                    <p class="nosotros-p">Aspiramos a ser líderes en el sector de manufactura y construcción a nivel nacional, desarrollando proyectos innovadores, 
+                        sustentables y eficientes que brinden soluciones óptimas a las necesidades de nuestros clientes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="nosotros-stats">
+                <div class="nosotros-stat-item">
+                    <i class="fas fa-industry"></i>
+                    <span class="counter" data-target="20">1</span>
+                    <p>Proyectos Completos</p>
+                </div>
+                <div class="nosotros-stat-item">
+                    <i class="fas fa-handshake"></i>
+                    <span class="counter" data-target="20">1</span>
+                    <p>Clientes Satisfechos</p>
+                </div>
+                <div class="nosotros-stat-item">
+                    <i class="fas fa-users-cog"></i>
+                    <span class="counter" data-target="200">1</span>
+                    <p>Trabajadores Empleados</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="contact-area">
+        <h2><i class="fa-solid fa-envelope"></i> CONTACTANOS <i class="fa-solid fa-envelope"></i> </h2>
+        <p>¿Tienes alguna consulta o necesitas más información? No dudes en ponerte en contacto con nosotros.</p>
+        <a href="contacto.html">Envíanos un correo</a>
+    </div>
+
+    <section class="line_3"></section>
+    <a class="scroll-to-top" title="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </a>    
+    <a href="https://wa.me/981092552" class="whatsapp-icon" target="_blank" title="Chat con nosotros en WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <footer>
+      <div id="pie-container"></div>
+    </footer>
+
+    <script>
+        const carouselSlide = document.getElementById('carousel-slide');
+        const indicators = document.querySelectorAll('.nosotros-indicator');
+        let currentIndex = 0;
+    
+        function showSlide(index) {
+            const width = carouselSlide.clientWidth;
+            carouselSlide.style.transform = `translateX(${-index * width}px)`;
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('nosotros-active', i === index);
+            });
+        }
+    
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % indicators.length;
+            showSlide(currentIndex);
+        }, 3000);
+    
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                showSlide(currentIndex);
+            });
+        });
+    
+        // Función para contar los números
+        function startCounting() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                counter.innerText = '0';
+                const updateCounter = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+    
+                    const increment = target / 100; // 
+    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCounter, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+    
+        const statsSection = document.querySelector('.nosotros-stats');
+        let hasAnimated = false;
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    startCounting();
+                    hasAnimated = true; 
+                    observer.unobserve(statsSection); 
+                }
+            });
+        }, { threshold: 0.5 });
+    
+        observer.observe(statsSection);
+    </script>
+    <script src="js/scroll.js" defer></script>  
+    <script src="js/navbar.js"></script>
+
+</body>
+</html>

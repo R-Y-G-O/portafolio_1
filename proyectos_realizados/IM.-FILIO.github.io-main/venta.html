@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamentos en Venta - Piura</title>
+    <link rel="stylesheet" href="estilos/estilo_general.css">
+    <link rel="stylesheet" href="estilos/botones.css">
+    <link rel="stylesheet" href="estilos/venta.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="img/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <main class="container">
+        <section class="sidebar">
+            <h2>FILTRA TU BÚSQUEDA</h2>
+
+            <div class="filter-section">
+                <label for="ciudad">Ciudad</label>
+                <ul>
+                    <li><input type="checkbox" class="filtro-ciudad" value="Miraflores"> Miraflores</li>
+                    <li><input type="checkbox" class="filtro-ciudad" value="San Isidro"> San Isidro</li>
+                    <li><input type="checkbox" class="filtro-ciudad" value="Surco"> Surco</li>
+                    <li><input type="checkbox" class="filtro-ciudad" value="La Molina"> La Molina</li>
+                    <li><input type="checkbox" class="filtro-ciudad" value="Barranco"> Barranco</li>
+                    <li><input type="checkbox" class="filtro-ciudad" value="San Borja"> San Borja</li>
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <label for="distrito">Distrito</label>
+                <ul id="lista-distritos">
+                    <!-- Distritos se llenarán dinámicamente aquí -->
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <label for="tipo-propiedad">Tipo de propiedad</label>
+                <ul>
+                    <li><input type="checkbox" class="filtro-tipo" value="residencial"> Residencial</li>
+                    <li><input type="checkbox" class="filtro-tipo" value="comercial"> Comercial</li>
+                    <li><input type="checkbox" class="filtro-tipo" value="industrial"> Industrial</li>
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <label for="precio-min">Precio Mín. $</label>
+                <input type="text" id="precio-min">
+                <label for="precio-max">Precio Máx. $</label>
+                <input type="text" id="precio-max">
+            </div>
+
+            <div class="filter-section">
+                <label for="superficie-min">Superficie Mín. m2</label>
+                <input type="text" id="superficie-min">
+                <label for="superficie-max">Superficie Máx. m2</label>
+                <input type="text" id="superficie-max">
+            </div>
+ 
+            <button class="filter-btn" onclick="aplicarFiltros()"><i class="fas fa-filter"></i> FILTRA TU BÚSQUEDA</button>
+        </section>
+
+        <section class="properties">
+            <h2>PROPIEDADES EN VENTA</h2>
+            <div id="tarjetas-container-filtrado" class="tarjetas-container">
+
+            </div>
+            <div id="paginacion-container"></div>
+        </section>
+
+        <div id="overlay" class="overlay" style="display:none;"></div>
+        <div id="formulario-contacto" class="formulario" style="display:none;">
+            <h2>SOLICITAR INFORMACION</h2>
+            <div class="info-propiedad">
+                <p><strong>Título:</strong> <span id="titulo-propiedad-info"></span></p>
+                <p><strong>Descripción:</strong> <span id="descripcion-propiedad-info"></span></p>
+                <p><strong>Precio:</strong> <span id="precio-propiedad-info"></span></p>
+                <p><strong>Ubicación:</strong> <span id="ciudad-propiedad-info"></span>, <span id="ubicacion-propiedad-info"></span></p>
+                <p><strong>Tamaño:</strong> <span id="area-propiedad-info"></span>m²</p>
+            </div>
+            <form id="contactForm">
+                <input type="hidden" id="titulo-propiedad" name="titulo">
+                <input type="hidden" id="descripcion-propiedad" name="descripcion">
+                <input type="hidden" id="precio-propiedad" name="precio">
+                <input type="hidden" id="ciudad-propiedad" name="ciudad">
+                <input type="hidden" id="ubicacion-propiedad" name="ubicacion">
+                <input type="hidden" id="area-propiedad" name="area">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+                <button type="submit" class="abrir_formulario">Enviar</button>
+                <button type="button" onclick="cerrarFormulario()" class="cerrar_formulario">Cancelar</button>
+            </form>
+        </div>
+    </main>
+
+    <a class="scroll-to-top" title="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </a>  
+    <a href="https://wa.me/123456789" class="whatsapp-icon" target="_blank" title="Chat con nosotros en WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <footer>
+        <div id="pie-container"></div>
+    </footer>
+
+    <script src="js/propiedades.js"></script>
+    <script>
+        const distritosPorCiudad = {
+            "Miraflores": ["Ciudad Jardín", "Avenida Principal"],
+            "San Isidro": ["Distrito Empresarial", "Parque Industrial"],
+            "Surco": ["Campo Verde", "Centro Histórico"],
+            "La Molina": ["Campo Verde", "Distrito Empresarial"],
+            "Barranco": ["Parque Industrial", "Centro Histórico"],
+            "San Borja": ["Avenida Principal", "Campo Verde"]
+        };
+
+        function actualizarDistritos() {
+            const listaDistritos = document.getElementById('lista-distritos');
+            listaDistritos.innerHTML = ''; // Limpiar la lista de distritos
+
+            const ciudadesSeleccionadas = Array.from(document.querySelectorAll('.filtro-ciudad:checked')).map(input => input.value);
+            ciudadesSeleccionadas.forEach(ciudad => {
+                if (distritosPorCiudad[ciudad]) {
+                    distritosPorCiudad[ciudad].forEach(distrito => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<input type="checkbox" class="filtro-distrito" value="${distrito}"> ${distrito}`;
+                        listaDistritos.appendChild(li);
+                    });
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.filtro-ciudad').forEach(ciudadCheckbox => {
+                ciudadCheckbox.addEventListener('change', actualizarDistritos);
+            });
+            aplicarFiltros(); 
+        });
+    </script>
+    <script>
+        //mostrar propiedades filtradas desde INDEX
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const idPropiedad = urlParams.get('id');
+            const cityParam = urlParams.get('city');
+
+            if (idPropiedad) {
+                mostrarPropiedadFiltrada_Index(idPropiedad);
+            }
+
+            if (cityParam) {
+                const cityCheckbox = document.querySelector(`input.filtro-ciudad[value="${cityParam}"]`);
+                if (cityCheckbox) {
+                    cityCheckbox.checked = true;
+                    actualizarDistritos();
+                }
+            }
+        };
+</script>
+<script>
+    
+let paginaActual = 1;
+const propiedadesPorPagina = 5;
+
+function aplicarFiltros() {
+    // Obtener valores seleccionados
+    const distritosSeleccionados = Array.from(document.querySelectorAll('.filtro-distrito:checked')).map(input => input.value);
+    const ciudadesSeleccionadas = Array.from(document.querySelectorAll('.filtro-ciudad:checked')).map(input => input.value);
+    const tiposSeleccionados = Array.from(document.querySelectorAll('.filtro-tipo:checked')).map(input => input.value);
+    const precioMin = parseFloat(document.getElementById('precio-min').value) || 0;
+    const precioMax = parseFloat(document.getElementById('precio-max').value) || Infinity;
+    const superficieMin = parseFloat(document.getElementById('superficie-min').value) || 0;
+    const superficieMax = parseFloat(document.getElementById('superficie-max').value) || Infinity;
+
+    const propiedadesFiltradas = propiedades.filter(propiedad => {
+        const precioValido = propiedad.precio >= precioMin && propiedad.precio <= precioMax;
+        const superficieValida = propiedad.area >= superficieMin && propiedad.area <= superficieMax;
+
+        // Validar ciudad y distrito
+        const ciudadValida = ciudadesSeleccionadas.length === 0 || ciudadesSeleccionadas.includes(propiedad.ciudad);
+        const distritoValido = distritosSeleccionados.length === 0 || distritosSeleccionados.includes(propiedad.ubicacion);
+
+        // Validar tipo
+        const tipoValido = tiposSeleccionados.length === 0 || tiposSeleccionados.includes(propiedad.tipo);
+
+        return precioValido && superficieValida && ciudadValida && distritoValido && tipoValido;
+    });
+
+    // Determinar el rango de propiedades a mostrar
+    const inicio = (paginaActual - 1) * propiedadesPorPagina;
+    const fin = inicio + propiedadesPorPagina;
+    const propiedadesParaMostrar = propiedadesFiltradas.slice(inicio, fin);
+
+    const contenedor = document.getElementById('tarjetas-container-filtrado');
+    contenedor.innerHTML = ''; // Limpiar contenedor
+
+    if (propiedadesParaMostrar.length === 0) {
+        const mensajeError = document.createElement('div');
+        mensajeError.className = 'mensaje-error';
+        mensajeError.textContent = 'No se encontraron propiedades con esos criterios.';
+        contenedor.appendChild(mensajeError);
+
+        // Crear botón para resetear filtros
+        const botonResetear = document.createElement('button');
+        botonResetear.textContent = 'Resetear Filtro';
+        botonResetear.className = 'button_reset';
+
+        botonResetear.addEventListener('click', () => {
+            resetearFiltros_2();
+        });
+
+        contenedor.appendChild(botonResetear);
+    } else {
+        propiedadesParaMostrar.forEach(propiedad => {
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'property-card';
+
+            const mapaSrc = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.748678842572!2d${propiedad.coordenadas.lng}!3d${propiedad.coordenadas.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb24a5f500c17%3A0x5b02910719db8c3a!2sGoogleplex!5e0!3m2!1ses!2s!4v1635946085203!5m2!1ses!2s`;
+
+            tarjeta.innerHTML = `
+                <img src="${propiedad.imagen}" alt="${propiedad.titulo}">
+                <div class="property-details">
+                    <h3>${propiedad.titulo}</h3>
+                    <p>${propiedad.descripcion}</p>
+                    <p>Ubicación: ${propiedad.ciudad}, ${propiedad.ubicacion}</p>
+                    <p>Precio: $${propiedad.precio}, Tamaño: ${propiedad.area}m²</p>
+                </div>
+                <div>
+                    <iframe src="${mapaSrc}" allowfullscreen="" class="mapa"></iframe>
+                </div>
+                <div class="property-actions">
+                    <button onclick="contactar('${propiedad.titulo}')"><i class="fas fa-envelope"></i> Contactar</button>
+                    <button onclick="llamar('${propiedad.titulo}')"><i class="fas fa-phone-alt"></i> Llamar</button>
+                </div>
+            `;
+            contenedor.appendChild(tarjeta);
+        });
+    }
+
+    // Mostrar botones de paginación
+    mostrarBotonesPaginacion(propiedadesFiltradas.length);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+}
+
+function mostrarBotonesPaginacion(totalPropiedades) {
+    const contenedorPaginacion = document.getElementById('paginacion-container');
+    contenedorPaginacion.innerHTML = ''; // Limpiar contenedor de paginación
+
+    const totalPaginas = Math.ceil(totalPropiedades / propiedadesPorPagina);
+
+    if (totalPaginas > 1) {
+        // Botón "Anterior"
+        if (paginaActual > 1) {
+            const botonAnterior = document.createElement('button');
+            botonAnterior.textContent = 'Anterior';
+            botonAnterior.className = 'boton_anterior';
+            botonAnterior.onclick = () => {
+                paginaActual--;
+                aplicarFiltros();
+                // Desplazarse al inicio de la página
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            contenedorPaginacion.appendChild(botonAnterior);
+        }
+
+        // Botones con números de página
+        for (let i = 1; i <= totalPaginas; i++) {
+            const botonPagina = document.createElement('button');
+            botonPagina.textContent = i;
+            botonPagina.className = 'boton_pagina';
+            botonPagina.style = `
+                background-color: ${i === paginaActual ? 'var(--primary-green)' : '#ccc'};
+                color: ${i === paginaActual ? '#fff' : '#000'};
+            `;
+
+            // Agregar evento al botón de la página
+            botonPagina.onclick = () => {
+                paginaActual = i;
+                aplicarFiltros();
+                // Desplazarse al inicio de la página
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            contenedorPaginacion.appendChild(botonPagina);
+        }
+
+        // Botón "Siguiente"
+        if (paginaActual < totalPaginas) {
+            const botonSiguiente = document.createElement('button');
+            botonSiguiente.textContent = 'Siguiente';
+            botonSiguiente.className = 'boton_siguiente';
+            botonSiguiente.onclick = () => {
+                paginaActual++;
+                aplicarFiltros();
+                // Desplazarse al inicio de la página
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            contenedorPaginacion.appendChild(botonSiguiente);
+        }
+    }
+}
+
+
+// Función para resetear los filtros
+function resetearFiltros_2() {
+    document.querySelectorAll('.filtro-distrito:checked').forEach(input => input.checked = false);
+    document.querySelectorAll('.filtro-ciudad:checked').forEach(input => input.checked = false);
+    document.querySelectorAll('.filtro-tipo:checked').forEach(input => input.checked = false);
+    document.getElementById('precio-min').value = '';
+    document.getElementById('precio-max').value = '';
+    document.getElementById('superficie-min').value = '';
+    document.getElementById('superficie-max').value = '';
+    paginaActual = 1;
+    aplicarFiltros();
+}
+</script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+    //funcion de envio de forlumario solicitar PROPIEDAD
+    (function() {
+         //API key de emailjs
+        emailjs.init(""); 
+    })();
+
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        document.getElementById("overlay").style.display = "block";
+
+         //service id y templare id de emailjs
+        const serviceID = ''; 
+        const templateID = '';
+
+        emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+                alert("Formulario enviado para la propiedad: " + document.getElementById('titulo-propiedad').value);
+                cerrarFormulario();
+            }, (err) => {
+                alert(JSON.stringify(err));
+                console.log('Failed to send email. Error:', err);
+            })
+            .finally(() => {
+                document.getElementById("overlay").style.display = "none";
+            });
+    });
+</script>
+    <script src="js/navbar.js"></script>
+    <script src="js/propiedades.js"></script>
+
+
+<!--este parte del codigo no es nesesaria-->   
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1BT477DH3B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1BT477DH3B');
+</script>
+<!--este parte del codigo no es nesesaria-->   
+
+</body>
+</html>

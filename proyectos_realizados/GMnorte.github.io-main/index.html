@@ -1,0 +1,581 @@
+﻿<!--
+Copyright (c) 2024 by Juan (https://codepen.io/juan-frontdev/pen/MWYeQqp) and gharsh11032000 (Harsh Gupta)
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMnorte</title>
+    <link rel="stylesheet" href="estilos/estilo.css">
+    <link rel="stylesheet" href="estilos/botones.css">
+    <link rel="stylesheet" href="estilos/carrusel.css">
+    <link rel="stylesheet" href="estilos/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="icon" href="img/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>   
+    <header>
+
+      <div id="navbar-container"></div>
+
+        <div class="carousel">
+            <div class="progress-bar progress-bar--primary hide-on-desktop">
+              <div class="progress-bar__fill"></div>
+            </div>
+          <header class="main-post-wrapper">
+            <div class="slides">
+              <article class="main-post main-post--active">
+                <div class="main-post__image">
+                  <img src="img/carrusel/carrusel_1.webp" alt="img_1" />
+                </div>
+                <div class="main-post__content">
+                  <div class="main-post__tag-wrapper">
+                    <span class="main-post__tag"></span>
+                  </div>
+                  <h1 class="main-post__title">COMERCIAL e INDUSTRIAL
+                    </h1>
+                  <a class="main-post__link" href="#">
+                        <span class="main-post__link-text">Conocer mas...</span>
+                        <svg
+                          class="main-post__link-icon main-post__link-icon--arrow"
+                          width="37"
+                          height="12"
+                          viewBox="0 0 37 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 6H36.0001M36.0001 6L31.0001 1M36.0001 6L31.0001 11"
+                            stroke="white"
+                          />
+                        </svg>
+                      </a>
+                </div>
+              </article>
+              <article class="main-post main-post--not-active">
+                <div class="main-post__image">
+                  <img src="img/carrusel/carrusel_2.webp" alt="img_2" />
+                </div>
+                <div class="main-post__content">
+                  <div class="main-post__tag-wrapper">
+                    <span class="main-post__tag"></span>
+                  </div>
+                  <h1 class="main-post__title">SALUD y BIENESTAR
+                  </h1>
+                  <a class="main-post__link" href="#">
+                    <span class="main-post__link-text">Buscanos...</span>
+                      <svg
+                      class="main-post__link-icon main-post__link-icon--arrow"
+                      width="37"
+                      height="12"
+                      viewBox="0 0 37 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 6H36.0001M36.0001 6L31.0001 1M36.0001 6L31.0001 11"
+                        stroke="white"
+                      />
+                    </svg>        
+                      </a>
+                </div>
+              </article>
+              <article class="main-post main-post--not-active">
+                <div class="main-post__image">
+                  <img src="img/carrusel/carrusel_3.webp" alt="img 3" />
+                </div>
+                <div class="main-post__content">
+                  <div class="main-post__tag-wrapper">
+                    <span class="main-post__tag"></span>
+                  </div>
+                  <h1 class="main-post__title">MISIÓN y VISIÓN
+                  </h1>
+                  <a class="main-post__link" href="contacto.html">
+                        <span class="main-post__link-text">Contactanos...</span>
+                        <svg
+                          class="main-post__link-icon main-post__link-icon--arrow"
+                          width="37"
+                          height="12"
+                          viewBox="0 0 37 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 6H36.0001M36.0001 6L31.0001 1M36.0001 6L31.0001 11"
+                            stroke="white"
+                          />
+                        </svg>
+                      </a>
+                </div>
+              </article>
+            </div>
+          </header> 
+          <div class="posts-wrapper hide-on-mobile interactive-element">
+            <article class="post post--active interactive-element">
+              <div class="progress-bar">
+                <div class="progress-bar__fill"></div>
+              </div>
+              <header class="post__header">
+                <span class="post__tag">PROYECTO:</span><p class="P_nombre">Estructura de acensor y data </p>
+                <p class="post__published">2019 <i class="fa-regular fa-calendar-check"></i></p>
+              </header>
+              <h2 class="post__title"> Experiencia acreditada en 
+                plantas
+                 industriales y agroindustriales, packing y
+                 naves de almacenamiento.
+                </h2>
+            </article>
+
+            <article class="post interactive-element">
+              <div class="progress-bar">
+                <div class="progress-bar__fill"></div>
+              </div>
+              <header class="post__header">
+                <span class="post__tag">PROYECTO:</span><p class="P_nombre">Sala de ventas inmobilaria</p>
+                <p class="post__published">2019 <i class="fa-regular fa-calendar-check"></i></p>
+              </header>
+              <h2 class="post__title">Amplia experiencia en proyectos de salud como
+                consultorios, clínicas y otros establecimientos según
+                su nivel de atención y categorización de acuerdo a la
+                normativa vigente.</h2>
+            </article>
+
+            <article class="post interactive-element">
+              <div class="progress-bar">
+                <div class="progress-bar__fill"></div>
+              </div>
+              <header class="post__header ">
+                <span class="post__tag">PROYECTO:</span><p class="P_nombre">sala de operaciones</p>
+                <p class="post__published">2024 <i class="fa-regular fa-calendar-check"></i></p>
+              </header>
+              <h2 class="post__title">Alcanzar la completa satisfacción de nuestros clientes cuidando la calidad con que
+                se desarrollan nuestras obras y haciéndolas perdurables en el tiempo. 
+               </h2>
+              <h2 class="post__title">Ser líderes en el mercado de la construcción nacional desarrollando proyectos de
+                calidad.
+               </h2>
+            </article>
+          </div>
+          </div>
+        </header>  
+
+    <section class="features-section-ser">
+      <h2 class="title"><i class="fa-solid fa-paperclip" id="icon"></i>CERTIFICACIONES<i class="fa-solid fa-paperclip" id="icon_gi"></i></h2>
+      <div class="features-container-ser">
+          <div class="feature-item-ser">
+              <img src="img/certificaciones/1.webp" alt="">
+              <div class="feature-text">
+              </div>
+          </div>
+          <div class="feature-item-ser">
+              <img src="img/certificaciones/2.webp" alt="">
+              <div class="feature-text"> 
+              </div>
+          </div>
+      </div>
+  </section>
+
+
+  <section class="features-section">
+    <h1 class="title"><i class="fa-solid fa-business-time" id="icon"></i>ESPECIALIDADES DE DESARROLLO<i class="fa-solid fa-business-time" id="icon_gi"></i></h1>
+    <div class="features-container">
+
+          <div class="feature-item item-civiles">
+              <div class="feature-text">
+                <a href="">
+                  <h3>OBRAS CIVILES</h3>
+                </a>
+              </div>
+          </div>
+
+          <div class="feature-item item-metalicas">
+              <div class="feature-text">
+                <a href="">
+                  <h3>ESTRUCTURAS METÁLICAS</h3>
+                </a>
+              </div>
+          </div>
+
+            <div class="feature-item item-drywall">
+              <div class="feature-text">
+                <a href="">
+                  <h3>SISTEMAS DRYWALL</h3>
+                </a>
+              </div>
+          </div>
+
+          <div class="feature-item item-acabados"> 
+            <div class="feature-text">
+              <a href="">
+                <h3>ACABADOS INTERIORES</h3>
+              </a>
+            </div>
+        </div>
+
+        <div class="feature-item item-sanitarias">
+            <div class="feature-text">
+              <a href="">
+                <h3>INSTALACIONES SANITARIAS</h3>
+              </a>
+            </div>
+        </div>
+
+        <div class="feature-item item-electricas">
+            <div class="feature-text">
+              <a href="">
+                <h3>INSTALACIONES ELÉCTRICAS</h3>
+              </a>
+            </div>
+        </div>
+
+        <div class="feature-item item-redes">
+            <div class="feature-text">
+              <a href="">
+                <h3>REDES DE DATA Y COMUNICACIÓN</h3>
+              </a>
+            </div>
+        </div>
+        <div class="feature-item item-especiales">
+            <div class="feature-text">
+              <a href="">
+                <h3>INSTALACIONES ESPECIALES</h3>
+              </a>
+            </div>
+        </div>
+  </section>
+
+
+
+    <section class="info-section">
+      <div class="info-container">  
+              <h1 class="title_imfromacion"><i class="fa-solid fa-circle-exclamation" id="icon"></i>IMFORMACION IMPORTANTE<i class="fa-solid fa-circle-exclamation" id="icon_gi"></i>
+              </h1>          
+          <div class="info-images">
+              <div class="contenedor" data-texto="Clik Proyecto Institucional">
+                  <a href="proyectos_institucionales.html">
+                      <img src="img/importante/par_1.webp" alt="Imagen 1">
+                  </a>
+              </div>
+              <div class="contenedor" data-texto="Clik Proyectos Industrial">
+                  <a href="proyectos_industriales.html">
+                      <img src="img/importante/par_2.webp" alt="Imagen 2">
+                  </a>
+              </div>
+              <div class="contenedor" data-texto="Clik Proyecto Salud">
+                  <a href="proyectos_salud.html">
+                      <img src="img/importante/par_3.webp" alt="Imagen 3">
+                  </a>
+              </div>
+              <div class="contenedor" data-texto="Clik Otros Proyectos">
+                  <a href="contacto.html">
+                      <img src="img/importante/par_4.webp" alt="Imagen 4">
+                  </a>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  <section class="stats-section">
+    <div class="stats-container">
+        <div class="stats-item">
+            <i class="fas fa-building fa-4x"></i>
+            <div class="stats-text">
+                <h3 class="counter" data-target="260">1</h3>
+                <p>OBRAS ENTREGADAS</p>
+            </div>
+        </div>
+        <div class="stats-item">
+            <i class="fas fa-ruler fa-4x"></i>
+            <div class="stats-text">
+                <h3 class="counter" data-target="180">1</h3>
+                <p>M2 DE INTERVENCIÓN</p>
+            </div>
+        </div>
+        <div class="stats-item">
+            <i class="fas fa-hard-hat fa-4x"></i>
+            <div class="stats-text">
+                <h3 class="counter" data-target="160">1</h3>
+                <p>HORAS HOMBRE EJECUTADAS</p>
+            </div>
+        </div>
+        <div class="stats-item">
+            <i class="fas fa-hammer fa-4x"></i>
+            <div class="stats-text">
+                <h3 class="counter" data-target="140">1</h3>
+                <p>INSTALACIÓN DE SISTEMAS DE DRYWALL</p>
+            </div>
+        </div>
+        <div class="stats-item">
+            <i class="fas fa-cogs fa-4x"></i>
+            <div class="stats-text">
+                <h3 class="counter" data-target="220">1</h3>
+                <p>COBERTURAS METÁLICAS</p>
+            </div>
+        </div>
+    </div>
+    <div id="area_proyectos"></div>
+</section>
+
+
+        <section id="proyectos">
+            <h1 class="title"><i class="fa-solid fa-drafting-compass" id="icon"></i>NUESTROS PROYECTOS<i class="fa-solid fa-drafting-compass" id="icon_gi"></i></h1>
+            <p class="text">En GM Norte, cada proyecto es una oportunidad para demostrar nuestro compromiso con la excelencia. Hemos desarrollado una amplia gama de proyectos, desde edificaciones educativas y comerciales hasta complejos de salud y recreativos. Nuestro portafolio refleja la calidad y el detalle con los que abordamos cada desafío, garantizando resultados excepcionales en cada uno de ellos.</p>
+            <div class="proyectos-container">
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=1">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 1">
+                      </a>
+                        <div class="proyecto-text">SALA DE VENTAS INMOVILARIA EDIFICA</div>
+                        
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=2">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 2">
+                      </a>
+                        <div class="proyecto-text">CONTRUCION DE ESTRUCTURA DE ASCENSOR Y DATA</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=3">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 3">
+                      </a>
+                        <div class="proyecto-text">REMODELACION DEL AREA DE HOSPITALIZACION 1°, 2° Y 3° PISO</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=4">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 4">
+                      </a>
+                        <div class="proyecto-text">ACONDICIONAMEINTO DE LA NUEVA SEDE - SENATI</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=5">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 5">
+                      </a>
+                        <div class="proyecto-text">CONSTRUCION DE FABRICACION Y HABILITACION DE 02 CASETAS DE PEAJE</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=6">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                      </a>
+                        <div class="proyecto-text">CONSTRUCION DEL CERCO PERIMETRAL - SENATI SECHURA</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=7">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                      </a>
+                        <div class="proyecto-text">2019 - SALA VENTAS BESCO Y 2022</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=8">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                      </a>
+                        <div class="proyecto-text">SALA DE SOLDADURA VIRTUAL - TALARA</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                    <div class="proyecto-image">
+                      <a href="proyectos_individual.html?id=9">
+                        <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                      </a>
+                        <div class="proyecto-text">REMODELACION DE LA SALA DE OPERACIONES SOP - AUNA</div>
+                    </div>
+                </div>
+                <div class="proyecto-item">
+                  <div class="proyecto-image">
+                    <a href="proyectos_individual.html?id=10">
+                      <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                    </a>
+                      <div class="proyecto-text">QUIMIOTERAPIA ,CONSULTORIOS ,MEJORAS Y MANOGRAFIA</div>
+                  </div>
+                </div>
+                <div class="proyecto-item">
+                  <div class="proyecto-image">
+                    <a href="proyectos_individual.html?id=11">
+                      <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                    </a>
+                      <div class="proyecto-text">COBERTURA METALICA - OHLA</div>
+                  </div>
+                </div>
+                <div class="proyecto-item">
+                  <div class="proyecto-image">
+                    <a href="proyectos_individual.html?id=12">
+                      <img src="img/obras-de-construccion-corporacion-.webp" alt="Proyecto 6">
+                    </a>
+                      <div class="proyecto-text">CLINICA DE PAITA - HABILITACION DE RAYOS X</div>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+
+    <section class="line"></section>
+         <h1 class="title"><i class="fa-solid fa-users-viewfinder" id="icon"></i>NUESTROS CLIENTES<i class="fa-solid fa-users-viewfinder" id="icon_gi"></i></h1>
+            <p class="text">
+              Nuestra empresa ha tenido el honor de colaborar con diversos clientes en proyectos de gran envergadura. Cada uno de ellos ha confiado en nuestra experiencia y profesionalismo, estamos agradecidos por su apoyo continuo y confianza en nuestros servicios.
+            </p>
+    <section class="cli-section">
+      <div class="cli-container">
+
+            <div class="cli-item item-1">
+                <div class="cli-text">
+                </div>
+            </div>
+  
+            <div class="cli-item item-2">
+                <div class="cli-text">
+                </div>
+            </div>
+  
+              <div class="cli-item item-3">
+                <div class="cli-text">
+                </div>
+            </div>
+  
+            <div class="cli-item item-4"> 
+              <div class="cli-text">
+              </div>
+          </div>
+  
+          <div class="cli-item item-5">
+              <div class="cli-text">
+              </div>
+          </div>
+  
+          <div class="cli-item item-6">
+              <div class="cli-text">
+              </div>
+          </div>
+  
+          <div class="cli-item item-7">
+              <div class="cli-text">
+              </div>
+          </div>
+
+          <div class="cli-item item-8">
+              <div class="cli-text">
+              </div>
+          </div>
+
+          <div class="cli-item item-9">
+            <div class="cli-text">
+            </div>
+        </div>
+
+        <div class="cli-item item-10">
+            <div class="cli-text">
+            </div>
+        </div>
+
+        <div class="cli-item item-11">
+          <div class="cli-text">
+          </div>
+        </div>
+
+        <div class="cli-item item-12">
+          <div class="cli-text">
+          </div>
+        </div>
+    </section>
+
+    <section class="seccion-verde">
+        <h2><i class="fa-solid fa-tools" id="icon"></i>¿ESTAS BUSCANDO UN EXPERTO EN CONSTRUCION?<i class="fa-solid fa-tools" id="icon_gi"></i></h2>
+        <a href="contacto.html">
+          <div class="container">
+            <button class="btn"><span>Solicitar acesoria</span></button>
+          </div>
+        </a>      
+    </section>
+    <section class="map_p">
+        <div class="map-container" style="position: relative;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.470403674595!2d-80.64189236576708!3d-5.188486361508663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x904a1a8532fb6515%3A0x8204da7812898f00!2sAv.%20Vice%20282%2C%20Piura%2020001!5e0!3m2!1ses-419!2spe!4v1723059249680!5m2!1ses-419!2spe" width="100%" height="500" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="contact-info-box">
+                <div class="contact-info-content">
+                    <h2><i class="fa-solid fa-envelope"></i> CONTACTANOS <i class="fa-solid fa-envelope"></i> </h2>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i>Avenida Vice N°282- Urb. Santa Ana - Piura</li>
+                        <li><i class="fas fa-phone-alt"></i> 981092552 / 073-613737</li>
+                        <li><i class="fas fa-envelope"></i> administracion@gmnorte.com</li>
+                        <li><i class="fas fa-envelope"></i> proyectos@gmnorte.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <a class="scroll-to-top" title="Volver arriba">
+        <i class="fa-solid fa-chevron-up"></i>
+    </a>    
+    <a href="https://wa.me/981092552" class="whatsapp-icon" target="_blank" title="Chat con nosotros en WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <footer>
+      <div id="pie-container"></div>
+    </footer>
+
+
+
+    <script>
+       // Función para contar los números
+       function startCounting() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                counter.innerText = '0';
+                const updateCounter = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+    
+                    const increment = target / 100; // 
+    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCounter, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+    
+        const statsSection = document.querySelector('.stats-section');
+        let hasAnimated = false;
+    
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    startCounting();
+                    hasAnimated = true; 
+                    observer.unobserve(statsSection); 
+                }
+            });
+        }, { threshold: 0.5 });
+    
+        observer.observe(statsSection);
+    </script>
+    <script src="js/carrusel.js" defer></script>      
+    <script src="js/scroll.js"></script>  
+    <script src="js/navbar.js"></script>
+</body>
+</html>
+
+
+

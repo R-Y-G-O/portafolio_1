@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuración — Analytics Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="estilos/base.css" />
+  <link rel="stylesheet" href="estilos/sidebar.css" />
+  <link rel="stylesheet" href="estilos/topbar.css" />
+  <link rel="stylesheet" href="estilos/settings.css" />
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html" style="display:flex;align-items:center;gap:.75rem;text-decoration:none;">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Analytics<strong>Pro</strong></span>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <span class="nav-group-label">Principal</span>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>Resumen</span></a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-chart-line"></i><span>Analíticas</span></a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-file-chart-column"></i><span>Reportes</span></a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Gestión</span>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-users"></i><span>Usuarios</span><span class="nav-badge">12</span></a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-folder-open"></i><span>Proyectos</span></a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-list-check"></i><span>Tareas</span><span class="nav-badge nav-badge--warn">5</span></a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Sistema</span>
+        <a href="settings.html" class="nav-item active"><i class="fa-solid fa-gear"></i><span>Configuración</span></a>
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-circle-question"></i><span>Ayuda</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar">RG</div>
+      <div class="user-info">
+        <span class="user-name">Ronald Gallo</span>
+        <span class="user-role">Ing. Software</span>
+      </div>
+      <button class="user-menu-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="breadcrumb">
+          <span>Dashboard</span>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span class="breadcrumb-active">Configuración</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-actions">
+          <button class="action-btn" id="themeToggle" title="Cambiar tema">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- Header de página -->
+      <div class="settings-page-header">
+        <div>
+          <h1 class="settings-page-title"><i class="fa-solid fa-sliders"></i> Configuración del Dashboard</h1>
+          <p class="settings-page-desc">Personaliza qué métricas mostrar, colores, tipos de gráfica y preferencias visuales.</p>
+        </div>
+        <div class="settings-header-actions">
+          <button class="btn-reset" id="resetAll">
+            <i class="fa-solid fa-rotate-left"></i> Restablecer todo
+          </button>
+          <button class="btn-save" id="saveAll">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-layout">
+
+        <!-- ── COLUMNA IZQUIERDA ── -->
+        <div class="settings-col">
+
+          <!-- KPI Cards -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fa-solid fa-square-poll-vertical"></i>
+              <div>
+                <h2>Tarjetas KPI</h2>
+                <p>Elige qué métricas mostrar en el panel principal</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="kpi-toggle-list" id="kpiToggles">
+                <!-- generado por JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Gráfica de líneas -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fa-solid fa-chart-line"></i>
+              <div>
+                <h2>Gráfica de tráfico</h2>
+                <p>Tipo de visualización y colores de las series</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+
+              <div class="setting-row">
+                <label class="setting-label">Tipo de gráfica</label>
+                <div class="chart-type-picker" id="lineTypePicker">
+                  <button class="type-opt active" data-type="line" title="Línea">
+                    <i class="fa-solid fa-chart-line"></i><span>Línea</span>
+                  </button>
+                  <button class="type-opt" data-type="bar" title="Barras">
+                    <i class="fa-solid fa-chart-bar"></i><span>Barras</span>
+                  </button>
+                  <button class="type-opt" data-type="area" title="Área">
+                    <i class="fa-solid fa-chart-area"></i><span>Área</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Color — Visitantes</label>
+                <div class="color-row">
+                  <input type="color" id="colorVisitors" value="#6366f1" class="color-input" />
+                  <div class="color-presets" data-target="colorVisitors">
+                    <button class="color-preset" style="background:#6366f1" data-color="#6366f1"></button>
+                    <button class="color-preset" style="background:#818cf8" data-color="#818cf8"></button>
+                    <button class="color-preset" style="background:#06b6d4" data-color="#06b6d4"></button>
+                    <button class="color-preset" style="background:#f43f5e" data-color="#f43f5e"></button>
+                    <button class="color-preset" style="background:#f59e0b" data-color="#f59e0b"></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Color — Sesiones</label>
+                <div class="color-row">
+                  <input type="color" id="colorSessions" value="#d946ef" class="color-input" />
+                  <div class="color-presets" data-target="colorSessions">
+                    <button class="color-preset" style="background:#d946ef" data-color="#d946ef"></button>
+                    <button class="color-preset" style="background:#f59e0b" data-color="#f59e0b"></button>
+                    <button class="color-preset" style="background:#06b6d4" data-color="#06b6d4"></button>
+                    <button class="color-preset" style="background:#f43f5e" data-color="#f43f5e"></button>
+                    <button class="color-preset" style="background:#a78bfa" data-color="#a78bfa"></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Mostrar puntos en la línea</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="showPoints" checked />
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Mostrar serie de sesiones</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="showSessions" checked />
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Gráfica de dona -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fa-solid fa-chart-pie"></i>
+              <div>
+                <h2>Gráfica de fuentes</h2>
+                <p>Colores de cada segmento de la dona</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="donut-colors-list" id="donutColorsList">
+                <!-- generado por JS -->
+              </div>
+              <div class="setting-row" style="margin-top:1rem">
+                <label class="setting-label">Grosor del corte (cutout)</label>
+                <div class="slider-row">
+                  <input type="range" id="donutCutout" min="40" max="85" value="72" class="range-input" />
+                  <span class="range-value" id="donutCutoutVal">72%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── COLUMNA DERECHA ── -->
+        <div class="settings-col">
+
+          <!-- Tabla -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fa-solid fa-table"></i>
+              <div>
+                <h2>Tabla de transacciones</h2>
+                <p>Columnas visibles y filas por página</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+
+              <div class="setting-row">
+                <label class="setting-label">Filas por página</label>
+                <select class="setting-select" id="rowsPerPage">
+                  <option value="5">5 filas</option>
+                  <option value="10">10 filas</option>
+                  <option value="15">15 filas</option>
+                  <option value="20">20 filas</option>
+                </select>
+              </div>
+
+              <div class="setting-row" style="align-items:flex-start;flex-direction:column;gap:.75rem">
+                <label class="setting-label">Columnas visibles</label>
+                <div class="columns-list" id="columnsList">
+                  <!-- generado por JS -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Apariencia general -->
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <i class="fa-solid fa-palette"></i>
+              <div>
+                <h2>Apariencia</h2>
+                <p>Tema, color de acento y densidad</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+
+              <div class="setting-row">
+                <label class="setting-label">Tema</label>
+                <div class="theme-picker" id="themePicker">
+                  <button class="theme-opt active" data-theme="dark">
+                    <i class="fa-solid fa-moon"></i> Oscuro
+                  </button>
+                  <button class="theme-opt" data-theme="light">
+                    <i class="fa-solid fa-sun"></i> Claro
+                  </button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Color de acento principal</label>
+                <div class="color-row">
+                  <input type="color" id="accentColor" value="#6366f1" class="color-input" />
+                  <div class="color-presets" data-target="accentColor">
+                    <button class="color-preset" style="background:#6366f1" data-color="#6366f1"></button>
+                    <button class="color-preset" style="background:#d946ef" data-color="#d946ef"></button>
+                    <button class="color-preset" style="background:#06b6d4" data-color="#06b6d4"></button>
+                    <button class="color-preset" style="background:#f59e0b" data-color="#f59e0b"></button>
+                    <button class="color-preset" style="background:#f43f5e" data-color="#f43f5e"></button>
+                    <button class="color-preset" style="background:#a78bfa" data-color="#a78bfa"></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Densidad de la interfaz</label>
+                <div class="density-picker" id="densityPicker">
+                  <button class="density-opt" data-density="compact">Compacta</button>
+                  <button class="density-opt active" data-density="normal">Normal</button>
+                  <button class="density-opt" data-density="comfortable">Cómoda</button>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Animaciones</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="enableAnimations" checked />
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <label class="setting-label">Sidebar colapsado por defecto</label>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="sidebarCollapsed" />
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Vista previa -->
+          <div class="settings-card settings-card--preview">
+            <div class="settings-card-header">
+              <i class="fa-solid fa-eye"></i>
+              <div>
+                <h2>Vista previa</h2>
+                <p>Así se verá tu color de acento</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="preview-box" id="previewBox">
+                <div class="preview-kpi">
+                  <div class="preview-icon" id="previewIcon"><i class="fa-solid fa-users"></i></div>
+                  <div>
+                    <div class="preview-label">Usuarios activos</div>
+                    <div class="preview-value" id="previewValue">8,472</div>
+                  </div>
+                </div>
+                <div class="preview-bar-wrap">
+                  <div class="preview-bar" id="previewBar"></div>
+                </div>
+                <div class="preview-btns">
+                  <button class="preview-btn-primary" id="previewBtnPrimary">Guardar</button>
+                  <button class="preview-btn-outline" id="previewBtnOutline">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Toast de confirmación -->
+      <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">Configuración guardada</span>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>
