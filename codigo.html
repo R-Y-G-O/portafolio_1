@@ -1,0 +1,196 @@
+---
+layout: default
+title: Código
+---
+
+<!-- ===== SECCIÓN CÓDIGO ===== -->
+  <section class="section" id="codigo">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-code"></i> Código</span>
+        <h2 class="section-title">Fragmentos destacados</h2>
+        <p class="section-desc">Ejemplos de código real extraídos de mis proyectos.</p>
+      </div>
+
+      <div class="code-tabs-wrapper">
+        <!-- Tab buttons -->
+        <div class="code-tabs" role="tablist">
+          <button class="code-tab active" data-tab="tab1" role="tab" aria-selected="true">
+            <i class="fa-solid fa-filter"></i> Filtro dinámico
+          </button>
+          <button class="code-tab" data-tab="tab2" role="tab" aria-selected="false">
+            <i class="fa-solid fa-chart-line"></i> Contador animado
+          </button>
+          <button class="code-tab" data-tab="tab3" role="tab" aria-selected="false">
+            <i class="fa-brands fa-css3-alt"></i> Carrusel CSS
+          </button>
+          <button class="code-tab" data-tab="tab4" role="tab" aria-selected="false">
+            <i class="fa-solid fa-chart-line"></i> Dashboard Chart
+          </button>
+        </div>
+
+        <!-- Tab 1 -->
+        <div class="code-panel active" id="tab1">
+          <div class="code-block-header">
+            <span class="code-lang"><i class="fa-brands fa-js"></i> JavaScript — IM.FILIO</span>
+            <button class="copy-btn" onclick="copyCode(this)" title="Copiar código">
+              <i class="fa-regular fa-copy"></i> Copiar
+            </button>
+          </div>
+          <pre><code class="language-javascript">// Filtro dinámico de propiedades — IM.FILIO
+function filtrarTarjetas() {
+  const ciudad    = document.getElementById('ciudad').value;
+  const precioMax = Number(document.getElementById('precio').value);
+  const areaMin   = Number(document.getElementById('area').value);
+  let coincidencias = 0;
+
+  document.querySelectorAll('.tarjeta_filtro').forEach(tarjeta => {
+    const cumpleCiudad = ciudad ? tarjeta.dataset.ciudad === ciudad : true;
+    const cumplePrecio = precioMax ? Number(tarjeta.dataset.precio) <= precioMax : true;
+    const cumpleArea   = areaMin  ? Number(tarjeta.dataset.area)   >= areaMin   : true;
+
+    const visible = cumpleCiudad && cumplePrecio && cumpleArea;
+    tarjeta.style.display = visible ? 'block' : 'none';
+    if (visible) coincidencias++;
+  });
+
+  document.getElementById('mensaje-no-coincidencias')
+    .style.display = coincidencias === 0 ? 'block' : 'none';
+}</code></pre>
+        </div>
+
+        <!-- Tab 2 -->
+        <div class="code-panel" id="tab2">
+          <div class="code-block-header">
+            <span class="code-lang"><i class="fa-brands fa-js"></i> JavaScript — GMnorte</span>
+            <button class="copy-btn" onclick="copyCode(this)" title="Copiar código">
+              <i class="fa-regular fa-copy"></i> Copiar
+            </button>
+          </div>
+          <pre><code class="language-javascript">// Contador animado con IntersectionObserver — GMnorte
+function startCounting() {
+  document.querySelectorAll('.counter').forEach(counter => {
+    counter.innerText = '0';
+    const target    = +counter.getAttribute('data-target');
+    const increment = target / 100;
+
+    const update = () => {
+      const current = +counter.innerText;
+      if (current < target) {
+        counter.innerText = Math.ceil(current + increment);
+        setTimeout(update, 30);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    update();
+  });
+}
+
+// Solo se activa cuando la sección es visible
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      startCounting();
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+observer.observe(document.querySelector('.stats-section'));</code></pre>
+        </div>
+
+        <!-- Tab 3 -->
+        <div class="code-panel" id="tab3">
+          <div class="code-block-header">
+            <span class="code-lang"><i class="fa-brands fa-css3-alt"></i> CSS — Carrusel</span>
+            <button class="copy-btn" onclick="copyCode(this)" title="Copiar código">
+              <i class="fa-regular fa-copy"></i> Copiar
+            </button>
+          </div>
+          <pre><code class="language-css">/* Carrusel de tarjetas con transición suave */
+.tarjetas_contenedor_filtro {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.tarjeta_filtro {
+  min-width: 268px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta_filtro:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
+}</code></pre>
+        </div>
+
+        <!-- Tab 4 -->
+        <div class="code-panel" id="tab4">
+          <div class="code-block-header">
+            <span class="code-lang"><i class="fa-brands fa-js"></i> JavaScript — Dashboard Analytics</span>
+            <button class="copy-btn" onclick="copyCode(this)" title="Copiar código">
+              <i class="fa-regular fa-copy"></i> Copiar
+            </button>
+          </div>
+          <pre><code class="language-javascript">// Gráfica de líneas con Chart.js — Dashboard Analytics
+function buildLineChart(range = '6m') {
+  const ctx  = document.getElementById('lineChart').getContext('2d');
+  const data = trafficData[range];
+
+  if (lineChart) lineChart.destroy();
+
+  lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.labels,
+      datasets: [{
+        label: 'Visitantes',
+        data: data.visitors,
+        borderColor: '#6366f1',
+        backgroundColor: 'rgba(99,102,241,0.1)',
+        borderWidth: 2.5,
+        tension: 0.4,
+        fill: true,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: {
+          ticks: {
+            callback: v => v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v,
+          },
+        },
+      },
+    },
+  });
+}
+
+// Cambiar rango al hacer clic en los botones
+document.querySelectorAll('.chart-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chart-btn')
+      .forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildLineChart(btn.dataset.range);
+  });
+});</code></pre>
+        </div>
+
+      </div>
+    </div>
+  
+    <a href="habilidades.html" class="hero-scroll" aria-label="Siguiente: Habilidades">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>

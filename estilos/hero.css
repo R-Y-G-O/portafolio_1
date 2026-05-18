@@ -6,13 +6,30 @@
 .hero {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   gap: 3rem;
   padding: 7rem 1.5rem 4rem;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.12), transparent 22%),
+              radial-gradient(circle at 80% 15%, rgba(34,197,94,0.1), transparent 20%),
+              radial-gradient(circle at 50% 80%, rgba(139,92,246,0.08), transparent 18%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content,
+.hero-visual {
+  position: relative;
+  z-index: 1;
 }
 
 /* Fondo de cuadrícula decorativa animada */
@@ -333,12 +350,20 @@
   .hero-btns { justify-content: center; }
   .hero-socials { justify-content: center; }
   .hero-visual { order: -1; }
-  .hero-card-code { max-width: 360px; }
+  .hero-card-code { max-width: 360px; margin: 0 auto; }
   .hero-scroll { display: none; }
+}
+
+@media (max-width: 700px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  .hero-btns .btn { width: 100%; justify-content: center; }
+  .hero-socials { flex-wrap: wrap; justify-content: center; }
+  .hero-title { justify-content: center; }
 }
 
 @media (max-width: 480px) {
   .hero-card-code { font-size: 0.75rem; }
+  .hero { padding-top: 4.5rem; gap: 2rem; }
 }
 
 /* ---- Sección Sobre mí mejorada ---- */

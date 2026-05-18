@@ -19,8 +19,8 @@
   --shadow:    0 4px 24px rgba(0,0,0,0.4);
   --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
   --transition: 0.3s ease;
-  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
 }
 
 *, *::before, *::after {
@@ -41,6 +41,18 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   position: relative;
+}
+
+/* Mejoras tipográficas y de renderizado */
+body, button, input, textarea, select {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text);
 }
 
 /* ---- Fondo animado con partículas ---- */
@@ -81,6 +93,24 @@ button {
   background: none;
 }
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(59,130,246,0.8);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ---- Scrollbar mejorada ---- */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { 
@@ -103,6 +133,15 @@ button {
   padding: 0 1.5rem;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .section {
+    padding: 3.5rem 0;
+  }
 }
 
 .btn {

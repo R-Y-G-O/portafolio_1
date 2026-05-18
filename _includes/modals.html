@@ -1,0 +1,76 @@
+<!-- ===== MODAL PROYECTO ===== -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-media">
+        <div class="modal-img-placeholder" id="modalIcon">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <span class="modal-badge" id="modalBadge">Categoría</span>
+        <h2 class="modal-title" id="modalTitle">Título</h2>
+        <div class="modal-meta" id="modalMeta"></div>
+        <p class="modal-desc" id="modalDesc">Descripción</p>
+        <div class="modal-problem" id="modalProblem" style="display:none;"></div>
+        <div class="modal-features" id="modalFeatures"></div>
+        <div class="modal-tech" id="modalTech"></div>
+        <a href="#" class="btn btn-primary" id="modalLink" target="_blank">
+          <i class="fa-solid fa-eye"></i> Ver proyecto
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL VIDEO ===== -->
+  <div class="modal-overlay" id="videoModalOverlay" role="dialog" aria-modal="true" aria-label="Demo del proyecto">
+    <div class="modal modal--video">
+      <button class="modal-close" onclick="closeVideoModal()" aria-label="Cerrar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Cabecera -->
+      <div class="video-modal-header">
+        <span class="video-modal-title" id="videoModalTitle">Demo del proyecto</span>
+        <span class="video-modal-badge badge-purple" id="videoModalBadge">
+          <i class="fa-solid fa-play"></i> Demo
+        </span>
+      </div>
+
+      <!-- Visor principal -->
+      <div class="demo-viewer" id="demoViewer">
+        <!-- Flechas de navegación -->
+        <button class="viewer-nav viewer-prev" id="viewerPrev" aria-label="Anterior">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="viewer-nav viewer-next" id="viewerNext" aria-label="Siguiente">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <!-- Contador -->
+        <div class="viewer-counter" id="viewerCounter"></div>
+        <!-- Video -->
+        <video id="projectVideo" controls playsinline preload="metadata" style="display:none">
+          <source id="videoSource" src="" type="video/mp4">
+        </video>
+        <!-- Imagen seleccionada -->
+        <picture id="viewerPicture" style="display:none">
+          <source id="viewerSourceImage" type="image/webp" />
+          <img id="viewerImg" src="" alt="Captura del proyecto" loading="lazy" decoding="async" importance="low" />
+        </picture>
+        <!-- Placeholder -->
+        <div class="video-placeholder" id="videoPlaceholder">
+          <i class="fa-solid fa-video-slash"></i>
+          <p>Video no disponible</p>
+          <span>Aún no se ha subido el demo de este proyecto</span>
+        </div>
+      </div>
+
+      <!-- Selector de miniaturas -->
+      <div class="demo-thumbs-section" id="demoThumbsSection" hidden>
+        <div class="demo-thumbs" id="demoThumbs"></div>
+      </div>
+
+    </div>
+  </div>

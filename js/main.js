@@ -9,6 +9,9 @@ const projectData = {
     title: 'Analytics Dashboard',
     badge: 'Analytics',
     badgeClass: '',
+    year: '2025',
+    role: 'Frontend / UI',
+    result: 'Panel interactivo para seguimiento de métricas y toma de decisiones rápidas.',
     icon: 'fa-solid fa-chart-pie',
     images: [
       'imagenes/proyectos_img/dashboard/dashboard.png',
@@ -34,6 +37,9 @@ const projectData = {
     title: 'GMnorte',
     badge: 'Construcción',
     badgeClass: '',
+    year: '2024',
+    role: 'Desarrollo web corporativo',
+    result: 'Nueva identidad digital con galería de proyectos y contacto directo.',
     icon: 'fa-solid fa-hard-hat',
     images: [
       'imagenes/proyectos_img/gmnorte/gm_norte.png',
@@ -58,6 +64,9 @@ const projectData = {
     title: 'IM. FILIO',
     badge: 'Inmobiliaria',
     badgeClass: 'badge-green',
+    year: '2024',
+    role: 'Experiencia de búsqueda',
+    result: 'Búsqueda de propiedades más rápida y experiencia de usuario más intuitiva.',
     icon: 'fa-solid fa-building',
     images: [
       'imagenes/proyectos_img/imfilio/im_filio.png',
@@ -82,6 +91,9 @@ const projectData = {
     title: 'Transporte GRUPO AOSC',
     badge: 'Full Stack',
     badgeClass: 'badge-purple',
+    year: '2025',
+    role: 'Full Stack / Laravel',
+    result: 'Gestión integral de rutas, reservas y pagos para transporte público.',
     icon: 'fa-solid fa-bus',
     images: [
       'imagenes/proyectos_img/transporte/img.jpg',
@@ -104,7 +116,8 @@ const projectData = {
     tech: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'AJAX', 'Bootstrap', 'Blade'],
     link: null,
     showLink: false,
-    video: 'videos/transporte/transporte.mp4',
+    video: 'videos/transporte/transporte-720p.mp4',
+    poster: 'videos/transporte/transporte-poster.jpg',
     screenshots: [
       'imagenes/proyectos_img/transporte/img.jpg',
       'imagenes/proyectos_img/transporte/img2.png',
@@ -115,6 +128,9 @@ const projectData = {
     title: 'AlveAppWeb',
     badge: 'Full Stack',
     badgeClass: 'badge-purple',
+    year: '2025',
+    role: 'Gestión de equipos',
+    result: 'Control y reportes industriales con autenticación y permisos granulares.',
     icon: 'fa-solid fa-gear',
     images: [
       'imagenes/proyectos_img/alveappweb/alveappweb.png',
@@ -140,7 +156,8 @@ const projectData = {
     tech: ['Laravel 13', 'PHP 8.3', 'MySQL', 'SQLite', 'Blade', 'Sanctum', 'DomPDF', 'QR Code', 'Laragon'],
     link: null,
     showLink: false,
-    video: 'videos/alveappweb/alveappweb.mp4',
+    video: 'videos/alveappweb/alveappweb-720p.mp4',
+    poster: 'videos/alveappweb/alveappweb-poster.jpg',
     screenshots: ['imagenes/proyectos_img/alveappweb/alveappweb.png'],
   },
 };
@@ -178,21 +195,21 @@ function renderProjectButtons() {
 
     let primaryBtn = '';
     if (action.type === 'link') {
-      primaryBtn = `<a href="${action.value}" target="_blank" class="overlay-btn" title="Ver sitio">
+      primaryBtn = `<a href="${action.value}" target="_blank" class="overlay-btn" title="Ver sitio" aria-label="Ver sitio ${data.title}">
         <i class="fa-solid fa-eye"></i></a>`;
     } else if (action.type === 'video') {
-      primaryBtn = `<button class="overlay-btn overlay-btn--play" onclick="openProject('${key}')" title="Ver demo">
+      primaryBtn = `<button class="overlay-btn overlay-btn--play" onclick="openProject('${key}')" title="Ver demo" aria-label="Ver demo ${data.title}">
         <i class="fa-solid fa-play"></i></button>`;
     } else if (action.type === 'images') {
-      primaryBtn = `<button class="overlay-btn overlay-btn--gallery" onclick="openProject('${key}')" title="Ver capturas">
+      primaryBtn = `<button class="overlay-btn overlay-btn--gallery" onclick="openProject('${key}')" title="Ver capturas" aria-label="Ver capturas ${data.title}">
         <i class="fa-solid fa-images"></i></button>`;
     } else {
-      primaryBtn = `<button class="overlay-btn overlay-btn--none" onclick="openNotFoundModal('${key}')" title="Sin vista previa">
+      primaryBtn = `<button class="overlay-btn overlay-btn--none" onclick="openNotFoundModal('${key}')" title="Sin vista previa" aria-label="Sin vista previa ${data.title}">
         <i class="fa-solid fa-image-slash"></i></button>`;
     }
 
     overlay.innerHTML = primaryBtn + `
-      <button class="overlay-btn" onclick="openModal('${key}')" title="Ver detalles">
+      <button class="overlay-btn" onclick="openModal('${key}')" title="Ver detalles" aria-label="Ver detalles ${data.title}">
         <i class="fa-solid fa-expand"></i>
       </button>`;
   });
@@ -227,6 +244,13 @@ function renderProjectButtons() {
 }
 
 /* ---- Modal galería de imágenes ---- */
+const getWebpSrc = src => src.replace(/\.(png|jpe?g)$/i, '.webp');
+const getWebpSrcSet = src => {
+  const webp = getWebpSrc(src);
+  const low  = webp.replace(/\.webp$/i, '-650w.webp');
+  return `${low} 1x, ${webp} 2x`;
+};
+
 function openGalleryModal(key) {
   const data = projectData[key];
   if (!data) return;
@@ -245,12 +269,24 @@ function openGalleryModal(key) {
   // Galería con todas las imágenes
   gallery.innerHTML = '';
   data.images.forEach(src => {
-    const img    = document.createElement('img');
-    img.src      = src;
-    img.alt      = `Captura de ${data.title}`;
-    img.loading  = 'lazy';
-    img.onclick  = () => window.open(src, '_blank');
-    gallery.appendChild(img);
+    const picture = document.createElement('picture');
+    const source  = document.createElement('source');
+    const img     = document.createElement('img');
+
+    source.type   = 'image/webp';
+    source.srcset = getWebpSrcSet(src);
+    source.sizes  = '(max-width: 700px) 100vw, 340px';
+
+    img.src       = src;
+    img.alt       = `Captura de ${data.title}`;
+    img.loading   = 'lazy';
+    img.decoding  = 'async';
+    img.importance= 'low';
+    img.addEventListener('click', () => window.open(src, '_blank'));
+
+    picture.appendChild(source);
+    picture.appendChild(img);
+    gallery.appendChild(picture);
   });
   gallery.style.display = 'grid';
 
@@ -333,6 +369,7 @@ function initSlideshows() {
 const navbar   = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
 const navLinks  = document.getElementById('navLinks');
+navToggle.setAttribute('aria-expanded', 'false');
 
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -345,6 +382,7 @@ navToggle.addEventListener('click', () => {
     ? '<i class="fa-solid fa-xmark"></i>'
     : '<i class="fa-solid fa-bars"></i>';
   navToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
 
 // Cerrar menú al hacer clic en un enlace
@@ -355,21 +393,18 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Resaltar enlace activo según sección visible
-const sections = document.querySelectorAll('section[id], .hero[id]');
+// Resaltar enlace activo según la página actual
 const navAnchors = document.querySelectorAll('.nav-links a');
+const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navAnchors.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${entry.target.id}`);
-      });
-    }
-  });
-}, { threshold: 0.4 });
-
-sections.forEach(s => sectionObserver.observe(s));
+navAnchors.forEach(a => {
+  const href = a.getAttribute('href');
+  if (href === currentPath) {
+    a.classList.add('active');
+  } else {
+    a.classList.remove('active');
+  }
+});
 
 /* =============================================
    FILTROS DE PROYECTOS
@@ -433,12 +468,31 @@ function openModal(key) {
   // Imagen real o ícono placeholder
   const modalMedia = document.getElementById('modalIcon');
   if (data.images && data.images.length > 0) {
-    modalMedia.innerHTML = `<img src="${data.images[0]}" alt="${data.title}" style="width:100%;height:100%;object-fit:cover;" />`;
+    modalMedia.innerHTML = `
+      <picture>
+        <source type="image/webp" srcset="${getWebpSrcSet(data.images[0])}" sizes="(max-width: 700px) 100vw, 340px" />
+        <img src="${data.images[0]}" alt="${data.title}" loading="lazy" decoding="async" importance="low" style="width:100%;height:100%;object-fit:cover;" />
+      </picture>`;
   } else {
     modalMedia.innerHTML = `<i class="${data.icon}"></i>`;
   }
 
   // Características
+  const metaEl = document.getElementById('modalMeta');
+  metaEl.innerHTML = `
+    <div class="modal-meta-item">
+      <span>Año</span>
+      <strong>${data.year || 'N/A'}</strong>
+    </div>
+    <div class="modal-meta-item">
+      <span>Rol</span>
+      <strong>${data.role || 'Desarrollo'}</strong>
+    </div>
+    <div class="modal-meta-item modal-meta-item--result">
+      <span>Resultado clave</span>
+      <strong>${data.result || 'Mejora de experiencia y eficiencia.'}</strong>
+    </div>`;
+
   const featEl = document.getElementById('modalFeatures');
   featEl.innerHTML = data.features
     .map(f => `<li><i class="fa-solid fa-check-circle"></i>${f}</li>`)
@@ -475,14 +529,16 @@ function closeModal() {
 const videoModalOverlay = document.getElementById('videoModalOverlay');
 
 function _showViewer(type, src) {
-  const video       = document.getElementById('projectVideo');
-  const viewerImg   = document.getElementById('viewerImg');
-  const placeholder = document.getElementById('videoPlaceholder');
+  const video         = document.getElementById('projectVideo');
+  const viewerImg     = document.getElementById('viewerImg');
+  const viewerPicture = document.getElementById('viewerPicture');
+  const placeholder   = document.getElementById('videoPlaceholder');
 
   // Ocultar todo primero
-  video.style.display       = 'none';
-  viewerImg.style.display   = 'none';
-  placeholder.style.display = 'none';
+  video.style.display         = 'none';
+  viewerPicture.style.display = 'none';
+  viewerImg.style.display     = 'none';
+  placeholder.style.display   = 'none';
   video.pause();
 
   if (type === 'video') {
@@ -498,7 +554,16 @@ function _showViewer(type, src) {
         <p>Video no disponible</p><span>El archivo no pudo cargarse</span>`;
     };
   } else if (type === 'image') {
-    viewerImg.src           = src;
+    const viewerSource = document.getElementById('viewerSourceImage');
+    viewerSource.srcset = getWebpSrcSet(src);
+    viewerSource.sizes  = '(max-width: 700px) 100vw, 340px';
+    viewerImg.src       = src;
+    viewerImg.alt       = `Captura de ${document.getElementById('videoModalTitle').textContent}`;
+    viewerImg.loading   = 'lazy';
+    viewerImg.decoding  = 'async';
+    viewerImg.importance= 'low';
+    const viewerPicture = document.getElementById('viewerPicture');
+    viewerPicture.style.display = 'block';
     viewerImg.style.display = 'block';
   } else {
     placeholder.style.display = 'flex';
@@ -570,7 +635,7 @@ function _buildThumbs(data) {
         <span>Video</span>
       </div>`;
     } else {
-      btn.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy" />`;
+      btn.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy" decoding="async" importance="low" />`;
     }
 
     btn.addEventListener('click', () => goTo(idx));
@@ -618,6 +683,13 @@ function _showVideoModal(key, preferVideo) {
   // Construir miniaturas
   _buildThumbs(data);
 
+  const video = document.getElementById('projectVideo');
+  if (hasVideo) {
+    video.poster = data.poster || (data.images && data.images.length > 0 ? data.images[0] : '');
+  } else {
+    video.poster = '';
+  }
+
   // Si no hay nada que mostrar
   if (!hasVideo && !hasImages) {
     const placeholder = document.getElementById('videoPlaceholder');
@@ -644,24 +716,30 @@ function closeVideoModal() {
   document.body.style.overflow = '';
 }
 
-videoModalOverlay.addEventListener('click', e => {
-  if (e.target === videoModalOverlay) closeVideoModal();
-});
+if (videoModalOverlay) {
+  videoModalOverlay.addEventListener('click', e => {
+    if (e.target === videoModalOverlay) closeVideoModal();
+  });
+}
 
-// Cerrar modal de detalles al hacer clic fuera
-modalOverlay.addEventListener('click', e => {
-  if (e.target === modalOverlay) closeModal();
-});
+if (modalOverlay) {
+  // Cerrar modal de detalles al hacer clic fuera
+  modalOverlay.addEventListener('click', e => {
+    if (e.target === modalOverlay) closeModal();
+  });
+}
 
 // Escape cierra cualquier modal abierto
 document.addEventListener('keydown', e => {
-  if (videoModalOverlay.classList.contains('open')) {
+  if (videoModalOverlay && videoModalOverlay.classList.contains('open')) {
     if (e.key === 'ArrowLeft'  && window._viewerGoTo) window._viewerGoTo(window._viewerActive() - 1);
     if (e.key === 'ArrowRight' && window._viewerGoTo) window._viewerGoTo(window._viewerActive() + 1);
     if (e.key === 'Escape') closeVideoModal();
     return;
   }
-  if (e.key === 'Escape') closeModal();
+  if (modalOverlay && modalOverlay.classList.contains('open') && e.key === 'Escape') {
+    closeModal();
+  }
 });
 
 /* =============================================
@@ -705,18 +783,6 @@ function copyCode(btn) {
   }).catch(() => {
     btn.textContent = 'Error';
   });
-}
-
-/* =============================================
-   FORMULARIO DE CONTACTO
-   ============================================= */
-function handleForm(e) {
-  e.preventDefault();
-  const note = document.getElementById('formNote');
-  note.textContent = '✓ Mensaje enviado. ¡Gracias por contactarme!';
-  note.classList.remove('error');
-  e.target.reset();
-  setTimeout(() => { note.textContent = ''; }, 5000);
 }
 
 /* =============================================
@@ -788,6 +854,13 @@ document.addEventListener('DOMContentLoaded', () => {
     hljs.highlightElement(block);
   });
 
+  // Optimizar imágenes ya cargadas
+  document.querySelectorAll('img').forEach(img => {
+    if (!img.loading) img.loading = 'lazy';
+    if (!img.decoding) img.decoding = 'async';
+    if (!img.importance) img.importance = 'low';
+  });
+
   // Botones dinámicos por proyecto
   renderProjectButtons();
 
@@ -797,6 +870,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reveal al scroll
   document.querySelectorAll('.project-card, .skill-card, .contact-item, .about-grid').forEach(el => {
     el.classList.add('reveal');
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => {
     revealObserver.observe(el);
   });
 

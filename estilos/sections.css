@@ -19,3 +19,114 @@
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+
+.service-grid,
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card,
+.process-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover,
+.process-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.12);
+}
+
+.service-card-icon {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(59,130,246,0.12);
+  color: var(--primary);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.service-title,
+.process-step-title {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.section-note {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.service-desc,
+.process-step p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.service-list {
+  list-style: disc inside;
+  margin: 0 0 1rem;
+  padding-left: 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.service-list li {
+  margin-bottom: 0.45rem;
+}
+
+.process-step-note {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(59,130,246,0.08);
+  color: var(--primary);
+  font-size: 0.85rem;
+  border: 1px solid rgba(59,130,246,0.12);
+}
+
+.service-badge {
+  display: inline-flex;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  background: rgba(59,130,246,0.08);
+  color: var(--primary);
+  border: 1px solid rgba(59,130,246,0.16);
+}
+
+.process-step-number {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .service-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
