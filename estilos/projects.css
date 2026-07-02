@@ -27,8 +27,8 @@
 }
 .filter-btn:hover {
   border-color: var(--primary);
-  color: var(--primary);
-  background: rgba(59,130,246,0.08);
+  color: var(--text);
+  background: var(--bg-alt);
 }
 .filter-btn.active {
   background: var(--primary);
@@ -59,7 +59,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(34,197,94,0.1));
+  background: var(--bg-alt);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 0;
@@ -71,9 +71,9 @@
 }
 
 .project-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(59,130,246,0.3), 0 0 0 1px rgba(59,130,246,0.2);
-  border-color: rgba(59,130,246,0.5);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
 }
 
 /* Media / imagen */
@@ -105,12 +105,12 @@
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  color: var(--primary);
-  opacity: 0.3;
+  color: var(--text-muted);
+  opacity: 0.2;
   transition: var(--transition);
 }
 .project-card:hover .project-img-placeholder {
-  opacity: 0.5;
+  opacity: 0.3;
   transform: scale(1.05);
 }
 
@@ -143,51 +143,31 @@
 .project-card:hover .project-overlay { opacity: 1; }
 
 .overlay-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), #2563eb);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border: none;
   cursor: pointer;
   transition: all var(--transition);
   transform: translateY(20px);
-  box-shadow: 0 8px 24px rgba(59,130,246,0.4);
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
 }
 
-.overlay-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.overlay-btn:hover::before {
-  opacity: 1;
-}
-
 .project-card:hover .overlay-btn { 
   transform: translateY(0);
-  animation: bounceIn 0.5s ease;
-}
-
-@keyframes bounceIn {
-  0% { transform: scale(0) translateY(20px); }
-  50% { transform: scale(1.1) translateY(0); }
-  100% { transform: scale(1) translateY(0); }
 }
 
 .overlay-btn:hover {
-  transform: scale(1.15) rotate(5deg) !important;
-  box-shadow: 0 12px 36px rgba(59,130,246,0.6);
+  transform: scale(1.1) !important;
+  background: var(--primary-h);
 }
 
 /* Badge de categoría mejorado */
@@ -195,31 +175,23 @@
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
-  background: linear-gradient(135deg, var(--primary), #2563eb);
+  background: var(--primary);
   color: #fff;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.3rem 0.8rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(59,130,246,0.4);
-  animation: badgeFloat 3s ease-in-out infinite;
+  box-shadow: var(--shadow);
   z-index: 10;
 }
 
-@keyframes badgeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
 .badge-green  { 
-  background: linear-gradient(135deg, var(--accent), #16a34a);
-  box-shadow: 0 4px 12px rgba(34,197,94,0.4);
+  background: var(--accent);
 }
 .badge-purple { 
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-  box-shadow: 0 4px 12px rgba(139,92,246,0.4);
+  background: var(--primary);
 }
 
 /* Sub-badge "Demo privada" */
@@ -249,23 +221,22 @@
 
 /* Botón play en overlay mejorado */
 .overlay-btn--play {
-  background: linear-gradient(135deg, var(--accent), #16a34a) !important;
-  box-shadow: 0 8px 24px rgba(34,197,94,0.4);
+  background: var(--accent) !important;
 }
 .overlay-btn--play:hover {
-  box-shadow: 0 12px 36px rgba(34,197,94,0.6) !important;
+  background: var(--accent-h) !important;
 }
 
 /* Botón "Ver demo" mejorado */
 .btn-play {
-  background: linear-gradient(135deg, var(--accent), #16a34a);
+  background: var(--accent);
   color: #fff;
-  border: 2px solid transparent;
-  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+  border: 1px solid var(--accent);
 }
 .btn-play:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(34,197,94,0.5);
+  background: var(--accent-h);
+  border-color: var(--accent-h);
+  transform: translateY(-2px);
 }
 
 /* Tech tags de colores para backend */
@@ -306,13 +277,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  background: rgba(59,130,246,0.1);
-  color: var(--primary);
-  border: 1px solid rgba(59,130,246,0.2);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   padding: 0.2rem 0.6rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Botones del proyecto */
@@ -407,19 +378,19 @@
   position: absolute;
   bottom: -2px;
   left: 0;
-  width: 60px;
+  width: 40px;
   height: 2px;
   background: var(--primary);
-  border-radius: 2px;
+  border-radius: 1px;
 }
 
 .projects-group-header i {
   font-size: 1.1rem;
-  color: var(--primary);
-  background: rgba(59,130,246,0.1);
+  color: var(--text-muted);
+  background: var(--bg-alt);
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -448,8 +419,8 @@
   background: var(--accent);
 }
 #group-fullstack .projects-group-header i {
-  color: var(--accent);
-  background: rgba(34,197,94,0.1);
+  color: var(--text-muted);
+  background: var(--bg-alt);
 }
 
 /* ---- Sección Problema / Solución ---- */
@@ -557,22 +528,21 @@
 
 /* ---- Botón galería de capturas mejorado ---- */
 .btn-gallery {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  background: var(--primary);
   color: #fff;
-  border: 2px solid transparent;
-  box-shadow: 0 4px 12px rgba(139,92,246,0.3);
+  border: 1px solid var(--primary);
 }
 .btn-gallery:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(139,92,246,0.5);
+  background: var(--primary-h);
+  border-color: var(--primary-h);
+  transform: translateY(-2px);
 }
 
 .overlay-btn--gallery {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
-  box-shadow: 0 8px 24px rgba(139,92,246,0.4);
+  background: var(--primary) !important;
 }
 .overlay-btn--gallery:hover {
-  box-shadow: 0 12px 36px rgba(139,92,246,0.6) !important;
+  background: var(--primary-h) !important;
 }
 
 /* ---- Botón sin vista previa ---- */

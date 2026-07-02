@@ -19,9 +19,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(59,130,246,0.12), transparent 22%),
-              radial-gradient(circle at 80% 15%, rgba(34,197,94,0.1), transparent 20%),
-              radial-gradient(circle at 50% 80%, rgba(139,92,246,0.08), transparent 18%);
+  background: radial-gradient(circle at 20% 20%, rgba(74,85,104,0.04), transparent 30%),
+              radial-gradient(circle at 80% 15%, rgba(113,128,150,0.03), transparent 25%);
   pointer-events: none;
   z-index: 0;
 }
@@ -32,22 +31,16 @@
   z-index: 1;
 }
 
-/* Fondo de cuadrícula decorativa animada */
+/* Fondo de cuadrícula decorativa sutil */
 .hero-bg-grid {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(74,85,104,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,85,104,0.02) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
   z-index: 0;
-  animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(48px, 48px); }
 }
 
 .hero-content,
@@ -72,29 +65,16 @@
 }
 
 .hero-greeting {
-  color: var(--accent);
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   animation: fadeIn 1s ease 0.2s both;
-}
-
-.hero-greeting::before {
-  content: '👋';
-  display: inline-block;
-  animation: wave 2s ease-in-out infinite;
-}
-
-@keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  10%, 30% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  40%, 100% { transform: rotate(0deg); }
 }
 
 @keyframes fadeIn {
@@ -112,48 +92,23 @@
 }
 
 .hero-name .accent {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   display: block;
-  animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(20deg); }
 }
 
 .hero-title {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(34,197,94,0.1);
-  color: var(--accent);
-  border: 1px solid rgba(34,197,94,0.3);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   padding: 0.35rem 1rem;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
   margin-bottom: 1.25rem;
-  animation: fadeIn 1s ease 0.6s both, pulse 2s ease-in-out 2s infinite;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-title::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(34,197,94,0.2), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
+  animation: fadeIn 1s ease 0.6s both;
 }
 
 .hero-desc {
@@ -194,25 +149,11 @@
   overflow: hidden;
 }
 
-.hero-socials a::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.hero-socials a:hover::before {
-  opacity: 1;
-}
-
 .hero-socials a:hover {
-  border-color: transparent;
-  color: #fff;
-  transform: translateY(-5px) rotate(360deg);
-  box-shadow: 0 8px 24px rgba(59,130,246,0.4);
+  border-color: var(--primary);
+  color: var(--text);
+  transform: translateY(-3px);
+  background: var(--bg-alt);
 }
 
 /* ---- Tarjeta de código en el hero mejorada ---- */
@@ -234,41 +175,14 @@
 }
 
 .hero-card-code {
-  background: #0d1117;
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   width: 100%;
   max-width: 460px;
-  box-shadow: var(--shadow-lg), 0 0 60px rgba(59,130,246,0.15);
-  animation: floatCard 4s ease-in-out infinite;
+  box-shadow: var(--shadow-lg);
   position: relative;
-}
-
-.hero-card-code::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
-  background-size: 200% 200%;
-  border-radius: var(--radius);
-  z-index: -1;
-  animation: borderGlow 3s ease infinite;
-  opacity: 0.5;
-}
-
-@keyframes borderGlow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-@keyframes floatCard {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(1deg); }
-  75% { transform: translateY(-10px) rotate(-1deg); }
 }
 
 .code-header {
@@ -284,28 +198,16 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  animation: dotPulse 2s ease-in-out infinite;
 }
-.dot.red    { background: #ff5f57; animation-delay: 0s; }
-.dot.yellow { background: #febc2e; animation-delay: 0.2s; }
-.dot.green  { background: #28c840; animation-delay: 0.4s; }
-
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
-}
+.dot.red    { background: #6b7280; }
+.dot.yellow { background: #6b7280; }
+.dot.green  { background: #6b7280; }
 
 .code-filename {
   margin-left: auto;
   font-size: 0.78rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  animation: blink 1.5s ease-in-out infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 }
 
 .hero-card-code pre {
@@ -386,46 +288,37 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: var(--bg-alt);
+  border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 5rem;
-  color: #fff;
-  box-shadow: 0 0 60px rgba(59,130,246,0.4);
-  animation: avatarPulse 3s ease-in-out infinite;
+  color: var(--text-muted);
+  box-shadow: var(--shadow);
   position: relative;
 }
 
-.avatar-placeholder::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
+.avatar-placeholder img {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
-  background-size: 200% 200%;
-  animation: borderGlow 3s ease infinite;
-  z-index: -1;
-  opacity: 0.6;
+  object-fit: cover;
+  display: block;
 }
 
-@keyframes avatarPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
 
 .about-badge {
-  background: var(--bg-card);
+  background: var(--bg-alt);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   padding: 0.4rem 1rem;
   font-size: 0.85rem;
-  color: var(--accent);
-  font-weight: 600;
+  color: var(--text-muted);
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  animation: pulse 2s ease-in-out infinite;
 }
 
 .about-text p {
@@ -435,10 +328,7 @@
 }
 .about-text strong { 
   color: var(--text);
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 600;
 }
 
 .about-stats {
@@ -462,20 +352,14 @@
 
 .stat-num {
   font-size: 2.2rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 700;
+  color: var(--text);
   line-height: 1;
 }
 .stat-pct {
   font-size: 1.4rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-weight: 700;
+  color: var(--text);
 }
 .stat-label {
   font-size: 0.78rem;
@@ -496,40 +380,43 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(59,130,246,0.1);
-  color: var(--primary);
-  border: 1px solid rgba(59,130,246,0.25);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   padding: 0.35rem 0.85rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
   transition: all var(--transition);
   cursor: pointer;
 }
 .stack-tag:hover {
-  background: rgba(59,130,246,0.2);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
 }
 
 .stack-tag--accent {
-  background: rgba(34,197,94,0.1);
-  color: var(--accent);
-  border-color: rgba(34,197,94,0.25);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border-color: var(--border);
 }
 .stack-tag--accent:hover { 
-  background: rgba(34,197,94,0.2);
-  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .stack-tag--muted {
-  background: rgba(148,163,184,0.08);
+  background: var(--bg-alt);
   color: var(--text-muted);
   border-color: var(--border);
 }
 .stack-tag--muted:hover { 
-  background: rgba(148,163,184,0.15);
-  box-shadow: 0 4px 12px rgba(148,163,184,0.2);
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 
 @media (max-width: 768px) {
@@ -539,4 +426,16 @@
   }
   .about-avatar { margin: 0 auto; }
   .about-tech-stack { justify-content: center; }
+}
+
+/* ---- Wrapper para el botón de descarga del CV ---- */
+.about-cv-wrapper {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .about-cv-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 }

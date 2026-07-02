@@ -846,6 +846,104 @@ const skillsObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 
 /* =============================================
+   FORMULARIO DE CONTACTO
+   ============================================= */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const btnSubmit = document.getElementById('btn-submit');
+  const formNote = document.getElementById('form-note');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Resetear nota
+    formNote.textContent = '';
+    formNote.className = 'form-note';
+    formNote.style.opacity = '1';
+
+    // Validar campos
+    if (!name || !email || !message) {
+      formNote.textContent = 'Por favor, completa todos los campos obligatorios.';
+      formNote.classList.add('error');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      formNote.textContent = 'Por favor, ingresa un correo electrónico válido.';
+      formNote.classList.add('error');
+      return;
+    }
+
+    // Estado cargando en el botón
+    const originalText = btnSubmit.innerHTML;
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+
+    // Simulación de envío API
+    setTimeout(() => {
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = originalText;
+
+      // Feedback exitoso (usa color accent por defecto)
+      formNote.textContent = '¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.';
+      form.reset();
+
+      // Desvanecer el mensaje después de 5 segundos
+      setTimeout(() => {
+        formNote.style.transition = 'opacity 0.5s';
+        formNote.style.opacity = '0';
+        setTimeout(() => {
+          formNote.textContent = '';
+          formNote.style.opacity = '1';
+          formNote.className = 'form-note';
+        }, 500);
+      }, 5000);
+    }, 1500);
+  });
+}
+
+/* =============================================
+   ACORDEÓN DE FAQ
+   ============================================= */
+function initFaqAccordion() {
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.parentElement;
+      const answer = question.nextElementSibling;
+      const isActive = item.classList.contains('active');
+
+      // Cerrar otros acordeones abiertos
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item && otherItem.classList.contains('active')) {
+          otherItem.classList.remove('active');
+          otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+          otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Alternar estado actual
+      if (isActive) {
+        item.classList.remove('active');
+        answer.style.maxHeight = '0';
+        question.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        question.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+
+/* =============================================
    INICIALIZACIÓN
    ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
@@ -860,6 +958,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!img.decoding) img.decoding = 'async';
     if (!img.importance) img.importance = 'low';
   });
+
+  // Formulario de contacto
+  initContactForm();
+
+  // Acordeón FAQ
+  initFaqAccordion();
 
   // Botones dinámicos por proyecto
   renderProjectButtons();

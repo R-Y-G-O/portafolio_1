@@ -15,12 +15,12 @@
 }
 
 .navbar.scrolled {
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 1px rgba(59,130,246,0.3);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.4);
   padding: 0.6rem 0;
-  border-bottom: 1px solid rgba(59,130,246,0.1);
+  border-bottom: 1px solid var(--border);
 }
 
 .nav-container {
@@ -50,7 +50,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: var(--primary);
   transition: width 0.3s ease;
 }
 
@@ -59,18 +59,11 @@
 }
 
 .nav-logo:hover { 
-  color: var(--primary);
-  transform: scale(1.05);
+  color: var(--text);
 }
 
 .logo-bracket {
-  color: var(--primary);
-  animation: bracketPulse 2s ease-in-out infinite;
-}
-
-@keyframes bracketPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  color: var(--text-muted);
 }
 
 .nav-links {
@@ -97,7 +90,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(34,197,94,0.1));
+  background: var(--bg-alt);
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
@@ -110,7 +103,7 @@
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--primary);
+  color: var(--text);
   transform: translateY(-2px);
 }
 
@@ -119,7 +112,7 @@
 }
 
 .nav-links a:hover i {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.1);
 }
 
 .nav-toggle {
@@ -134,10 +127,9 @@
 }
 
 .nav-toggle:hover { 
-  color: var(--primary);
-  background: rgba(59,130,246,0.1);
-  border-color: rgba(59,130,246,0.3);
-  transform: rotate(90deg);
+  color: var(--text);
+  background: var(--bg-alt);
+  border-color: var(--border);
 }
 
 /* ---- Mobile ---- */
@@ -150,7 +142,7 @@
     right: -100%;
     width: min(300px, 85vw);
     height: 100vh;
-    background: linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,41,59,0.98));
+    background: var(--bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
@@ -159,7 +151,7 @@
     gap: 0.5rem;
     transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     box-shadow: -8px 0 40px rgba(0,0,0,0.6);
-    border-left: 2px solid rgba(59,130,246,0.2);
+    border-left: 1px solid var(--border);
     overflow-y: auto;
   }
 

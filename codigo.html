@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Código
+title: Código limpio
+permalink: /codigo.html
 ---
 
 <!-- ===== SECCIÓN CÓDIGO ===== -->
@@ -22,7 +23,7 @@ title: Código
             <i class="fa-solid fa-chart-line"></i> Contador animado
           </button>
           <button class="code-tab" data-tab="tab3" role="tab" aria-selected="false">
-            <i class="fa-brands fa-css3-alt"></i> Carrusel CSS
+            <i class="fa-brands fa-laravel"></i> Arquitectura Laravel
           </button>
           <button class="code-tab" data-tab="tab4" role="tab" aria-selected="false">
             <i class="fa-solid fa-chart-line"></i> Dashboard Chart
@@ -103,31 +104,96 @@ observer.observe(document.querySelector('.stats-section'));</code></pre>
         <!-- Tab 3 -->
         <div class="code-panel" id="tab3">
           <div class="code-block-header">
-            <span class="code-lang"><i class="fa-brands fa-css3-alt"></i> CSS — Carrusel</span>
+            <span class="code-lang"><i class="fa-brands fa-laravel"></i> PHP / Laravel — MVC + Service Layer</span>
             <button class="copy-btn" onclick="copyCode(this)" title="Copiar código">
               <i class="fa-regular fa-copy"></i> Copiar
             </button>
           </div>
-          <pre><code class="language-css">/* Carrusel de tarjetas con transición suave */
-.tarjetas_contenedor_filtro {
-  display: flex;
-  gap: 1rem;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
+          <pre><code class="language-php">// 1. CONTROLADOR DELGADO (ProjectController.php)
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreProjectRequest;
+use App\Services\ProjectService;
+use Illuminate\Http\JsonResponse;
+
+class ProjectController extends Controller
+{
+    public function __construct(protected ProjectService $projectService) {}
+
+    public function store(StoreProjectRequest $request): JsonResponse
+    {
+        // El FormRequest ya validó y sanitizó los datos automáticamente
+        $project = $this->projectService->createProject($request->validated());
+
+        return response()->json([
+            'message' => 'Proyecto creado y procesado correctamente.',
+            'data' => $project
+        ], 201);
+    }
 }
 
-.tarjeta_filtro {
-  min-width: 268px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--card-bg);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+// 2. CAPA DE SERVICIO DESACOPLADA (ProjectService.php)
+namespace App\Services;
+
+use App\Models\Project;
+use App\Jobs\OptimizeProjectImages;
+use Illuminate\Support\Facades\DB;
+
+class ProjectService
+{
+    public function createProject(array $data): Project
+    {
+        // Garantizamos atomicidad usando transacciones de Base de Datos
+        return DB::transaction(function () use ($data) {
+            $project = Project::create([
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'client_id' => $data['client_id'],
+            ]);
+
+            if (!empty($data['technologies'])) {
+                $project->technologies()->sync($data['technologies']);
+            }
+
+            // Delegamos procesos pesados a la cola (Queue) con un Job
+            OptimizeProjectImages::dispatch($project);
+
+            return $project;
+        });
+    }
+
+    public function getActiveProjects()
+    {
+        // Rendimiento: Eager loading (with) para prevenir el problema de queries N+1
+        return Project::with(['technologies', 'client'])
+            ->where('status', 'active')
+            ->latest()
+            ->paginate(12);
+    }
 }
 
-.tarjeta_filtro:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
+// 3. VALIDACIÓN Y SANITIZACIÓN SEGURA (StoreProjectRequest.php)
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreProjectRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        // Autorización delegada mediante Laravel Policies
+        return $this->user()->can('create', Project::class);
+    }
+
+    public function rules(): array
+    {
+        return [
+            'title'        => 'required|string|max:100|unique:projects,title',
+            'description'  => 'required|string|min:10',
+            'client_id'    => 'required|exists:clients,id',
+            'technologies' => 'array|exists:technologies,id',
+        ];
+    }
 }</code></pre>
         </div>
 
